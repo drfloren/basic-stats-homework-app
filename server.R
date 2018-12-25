@@ -1,0 +1,197 @@
+#
+# This is the server logic of a Shiny web application. You can run the 
+# application by clicking 'Run App' above.
+#
+# Find out more about building applications with Shiny here:
+# 
+#    http://shiny.rstudio.com/
+#
+
+# Ok: what is the logic here? Have a problem and solution output. Within each, decide which chapter we are on, which section within the chapter, then output the correct problem/solution. To get the correct solution, the data needs to be independent of problem or solution...
+
+library(shiny)
+library(DT)
+R.utils::sourceDirectory("Problems")
+R.utils::sourceDirectory("Solutions")
+
+# Define server logic required to draw a histogram
+shinyServer(function(input, output) {
+  # Setting the problem number
+  probnum <- reactiveVal()
+  
+  observeEvent(input$manual_pnum, {
+    probnum(input$manual_pnum)
+  })
+  
+  observeEvent(input$newprob, {
+    npn <- sample(1:1000, size=1) #new problem number
+    probnum(npn)
+  })
+  
+  output$probnum <- renderText({
+    paste("Problem Number:", probnum())
+  })
+  
+  
+  
+  
+  
+  # Making the problem data (and situation)
+  probdat <- reactive({
+    # setting seed to the problem number
+    set.seed(probnum())
+    
+    # setting default output
+    stem <- "This is filler stem text and data. This implies that information for this chapter has not been loaded/generated. The data below should be the integers 1 through 20 in ascending order."
+    data <- 1:20
+    
+    # doing specific generation for 
+    if(input$ch == "c1"){
+      stem <- "This is the stem for C1"
+      data <- "This is the data for C1"
+      
+    } else if(input$ch == "c2"){
+      if(input$c2catcont=="cont"){
+        prob <- c2contp(n=input$c2n)
+        stem <- prob$stem
+        data <- prob$data
+      } else { #if not continuous
+        prob <- c2catp(n=input$c2n)
+        stem <- prob$stem
+        data <- prob$data
+      }
+      
+    } else if (input$ch == "c3"){
+      prob <- c3p(n=input$c3n)
+      stem <- prob$stem
+      data <- prob$data
+      
+    } else if (input$ch == "c4"){
+      
+    } else if (input$ch == "c5"){
+      
+    } else if (input$ch == "c6"){
+      
+    } else if (input$ch == "c7"){
+      
+    } else if (input$ch == "c8"){
+      
+    }
+    
+    list(stem=stem, data=data)
+  })
+  
+  output$problem <- renderUI({
+    HTML(c(probdat()$stem, #either c or paste?
+               "<br/>","<br/>",
+               paste(probdat()$data, collapse=", ")))
+  })
+  
+  
+  
+  
+  # need to split answers by chapter, so output will need to be different (and rendering will need to be different).
+  # if(input$ch=="c2"){
+  #   if(input$c2catcont=='cont'){
+  #     output$c2fd <- renderDataTable({
+  #       
+  #     })
+  #   } else {
+  #     
+  #   }
+  # }
+  
+  output$solutiontext <- renderPrint({
+    dat  <- probdat()$data
+    out <- "" #default output
+    if(input$ch == "c1"){
+      
+    } else if(input$ch == "c2"){
+      if(input$c2catcont=="cont"){
+        out <- c2conts_all_text(dat, numclass = input$c2numclass)
+      } else { #if not continuous
+        out <- c2cats_all_text(dat)
+      }
+      
+    } else if (input$ch == "c3"){
+      out <- c3s_text(dat)
+      
+    } else if (input$ch == "c4"){
+      
+    } else if (input$ch == "c5"){
+      
+    } else if (input$ch == "c6"){
+      
+    } else if (input$ch == "c7"){
+      
+    } else if (input$ch == "c8"){
+      
+    }
+    out
+  })
+  
+  output$solutionplot <- renderPlot({
+    dat  <- probdat()$data
+    if(input$ch == "c1"){
+      
+    } else if(input$ch == "c2"){
+      if(input$c2catcont=="cont"){
+        out <- c2conts_all_plots(dat, numclass = input$c2numclass)
+      } else { #if not continuous
+        out <- c2cats_all_plots(dat)
+      }
+      
+    } else if (input$ch == "c3"){
+      out <- c3s_plot(dat, outliers = input$c3bpo)
+      
+    } else if (input$ch == "c4"){
+      
+    } else if (input$ch == "c5"){
+      
+    } else if (input$ch == "c6"){
+      
+    } else if (input$ch == "c7"){
+      
+    } else if (input$ch == "c8"){
+      
+    }
+  })
+  
+  
+  
+  
+  
+  
+  
+  # as I only want to have 1 plot output device, I'm just using this 
+  height <- reactive({
+    height <- 400
+    if(input$ch == "c1"){
+      
+    } else if(input$ch == "c2"){
+      if(input$c2catcont=="cont"){
+        height <- 400*6 # muliply by the number of plots being output to get each one to be at 400 height. CEX is currently (and should be) set to 1 (or larger) to make sure they render alright (numbers/labels not too small, etc)...
+      } else { #if not continuous
+        height <- 400*3
+      }
+      
+    } else if (input$ch == "c3"){ #don't change, as just one plot...
+      
+    } else if (input$ch == "c4"){
+      
+    } else if (input$ch == "c5"){
+      
+    } else if (input$ch == "c6"){
+      
+    } else if (input$ch == "c7"){
+      
+    } else if (input$ch == "c8"){
+      
+    }
+    height
+  })
+  
+  output$plotui <- renderUI({
+    plotOutput("solutionplot", height = height())
+  })
+})
