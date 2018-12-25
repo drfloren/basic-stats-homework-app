@@ -29,12 +29,13 @@ shinyUI(fluidPage(
                    "Which chapter?",
                    choices = list(#"Chapter 1" = "c1",
                                   "Chapter 2" = "c2", 
-                                  "Chapter 3" = "c3",
-                                  "Chapter 4" = "c4", 
-                                  "Chapter 5" = "c5",
-                                  "Chapter 6" = "c6",
-                                  "Chapter 7" = "c7",
-                                  "Chapter 8" = "c8"),
+                                  "Chapter 3" = "c3"#,
+                                  #"Chapter 4" = "c4", 
+                                  #"Chapter 5" = "c5",
+                                  #"Chapter 6" = "c6",
+                                  #"Chapter 7" = "c7",
+                                  #"Chapter 8" = "c8"
+                                  ),
                   selected="c2"),
        
        # Chapter Options
@@ -45,11 +46,7 @@ shinyUI(fluidPage(
                      list("Categorical" = "cat", 
                           "Continuous" = "cont"), selected = "cont"),
          sliderInput("c2n", "Sample Size", min=9, max=30, value = 15),
-         checkboxInput("c2setnum", "Set the number of classes manually (otherwise, defaults to 7)."),
-         conditionalPanel(
-           condition = "input.c2setnum == true",
-           sliderInput("c2numclass", "Number of Classes", min=5, max=10, value=7)
-         )
+         sliderInput("c2numclass", "Number of Classes (for continuous)", min=5, max=10, value=7)
        ),
        
        conditionalPanel(
