@@ -8,8 +8,8 @@ weightdg <- function(n){sample(60:100, size=n, replace=TRUE)} #kilograms
 heightdg <- function(n){sample(157:193, size=n, replace=TRUE)} #centimeters
 
 c2cont_randdg <- function(n){
-  ds <- sample(1:4, size=1)
   dat <- list(sysbpdg(n), agedg(n), weightdg(n), heightdg(n))
+  ds <- sample(1:length(dat), size=1)
   dat[[ds]]
 }
 
@@ -28,10 +28,11 @@ btdg <- function(n){sample(c("A","B","AB","O"), size=n, replace = TRUE)} # blood
 hcdg <- function(n){sample(c("Yellow", "Brown", "Black", "Red"), size=n, replace = TRUE)} # hair color
 posdg <- function(n){sample(c("Gold", "Silver", "Bronze"), size=n, replace = TRUE)} # medals
 racedg <- function(n){sample(c("White", "Black", "Hispanic", "Asian"), size=n, replace = TRUE)} # race
+gradedg <- function(n){sample(c("A", "B", "C", "D", "F"), size=n, replace = TRUE)}
 
 c2cat_randdg <- function(n){
-  ds <- sample(1:4, size=1)
-  dat <- list(btdg(n), hcdg(n), posdg(n), racedg(n))
+  dat <- list(btdg(n), hcdg(n), posdg(n), racedg(n), gradedg(n))
+  ds <- sample(1:length(dat), size=1)
   dat[[ds]]
 }
 
