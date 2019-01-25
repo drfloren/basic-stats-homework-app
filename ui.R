@@ -66,8 +66,9 @@ shinyUI(fluidPage(
        tabsetPanel(type="tabs",
                    tabPanel("Problem", 
                             htmlOutput("problem")),
-                   tabPanel("Solutions", 
+                   tabPanel("Solutions",
                             verbatimTextOutput("solutiontext"),
+                            tags$head(tags$style("#solutiontext{min-width: 800px}")), #lots of HTML options available. The hashtag tells it what to apply these options to. This min width makes sure that the size of the output is at least what is needed to display the table nicely (at least for now). The width option in the server file, OUTSIDE of the render function, is what sets where the R code wraps in the first place (this was a pain and wasn't working when inside of the solutiontext render function).
                             uiOutput("plotui")))
     )
   )

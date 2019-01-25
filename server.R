@@ -13,6 +13,7 @@ library(shiny)
 library(DT)
 R.utils::sourceDirectory("Problems")
 R.utils::sourceDirectory("Solutions")
+options(width=120) #YES: this does what I want it to
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
