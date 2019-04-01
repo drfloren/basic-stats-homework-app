@@ -72,6 +72,10 @@ shinyServer(function(input, output) {
     } else if (input$ch == "c5"){
       
     } else if (input$ch == "c6"){
+      prob <- c6p(direction = input$c6dir, problem=input$c6type, n=input$c6n)
+      stem <- prob$stem
+      data <- prob$data
+      hidden_data <- prob$hidden_data
       
     } else if (input$ch == "c7"){ #need to figure out what to do for z, t, and p
       prob <- c7p(n=input$c7n, alpha=input$c7alpha)
@@ -131,6 +135,7 @@ shinyServer(function(input, output) {
     } else if (input$ch == "c5"){
       
     } else if (input$ch == "c6"){
+      out <- c6s_text(prob_type = hdat$prob_type, hdat=hdat)
       
     } else if (input$ch == "c7"){ #need to figure out what to do for z, t, and p (currently t)
       out <- t_test_steps(data = hdat$dat, alpha = hdat$alpha, dig=3)

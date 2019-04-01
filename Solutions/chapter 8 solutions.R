@@ -1,6 +1,6 @@
 # Header ----
 # Functions
-fr <- function(x, dig=2){
+fr <- function(x, dig=4){
   format(round(x, dig), nsmall = dig)
 }
 

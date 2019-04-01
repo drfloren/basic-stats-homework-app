@@ -32,7 +32,7 @@ shinyUI(fluidPage(
                                   "Chapter 3" = "c3",
                                   #"Chapter 4" = "c4"#, 
                                   #"Chapter 5" = "c5",
-                                  #"Chapter 6" = "c6",
+                                  "Chapter 6" = "c6",
                                   "Chapter 7" = "c7",
                                   "Chapter 8" = "c8"
                                   ),
@@ -54,6 +54,19 @@ shinyUI(fluidPage(
          h3("Chapter 3 Options"),
          sliderInput("c3n", "Sample Size", min=7, max=20, value = 15),
          checkboxInput("c3bpo", "Plot Outliers in Boxplot?", value = FALSE)
+       ),
+       
+       conditionalPanel(
+         condition = "input.ch == 'c6'",
+         h3("Chapter 6 Options"),
+         sliderInput("c6n", "Sample Size (when appropriate)", min=7, max=20, value = 15),
+         selectInput("c6dir", "Direction of Question", list("Random" = "random",
+                                                               "Greater Than" = "greater than",
+                                                               "Less Than" = "less than")), 
+         selectInput("c6type", "Type of Question", list("Z to Probability (basic)" = "z2p",
+                                                        "Z to Probability (word)" = "z2p_word",
+                                                        "Probability to Value" = "p2v",
+                                                        "Z to Probability (sample/clt)" = "z2p_samp"))
        ),
        
        conditionalPanel(
