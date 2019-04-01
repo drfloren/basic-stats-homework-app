@@ -108,15 +108,15 @@ c6p_p2v <- function(direction="random"){
   list(stem=stem, data="", hidden_data = list(direction=direction, pdir=pdir, md=md, sdd=sdd, p=p))
 }
 
-c6p <- function(problems="random", n=NULL, direction="random"){
+c6p <- function(prob_type="random", n=NULL, direction="random"){
   ds <- sample(1:4, size=1) # 4 types of problems: pick one.
   prob_names <- c("z2p", "z2p_word", "z2p_samp", "p2v")
-  if(problems=="random"){
-    pn <- c("z2p", "z2p_word", "z2p_samp", "p2v")[ds]
+  if(prob_type=="random"){
+    pn <- prob_names[ds]
   } else {
-    if(!(problems %in% prob_names))
+    if(!(prob_type %in% prob_names))
       stop(paste0("Problems must be one of the following: random, ", paste0(prob_names, collapse=", ")))
-    pn <- problems
+    pn <- prob_type
   }
   
   if(pn == "z2p"){

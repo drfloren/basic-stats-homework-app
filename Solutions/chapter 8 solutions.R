@@ -1,9 +1,4 @@
 # Header ----
-# Functions
-fr <- function(x, dig=4){
-  format(round(x, dig), nsmall = dig)
-}
-
 cv_t_plot <- function(direction, alpha, df=NULL, tail_exp=1.1){
   # checking on df if it is a t-test
   if(is.null(df))

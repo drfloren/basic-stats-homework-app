@@ -11,6 +11,7 @@ library(shiny)
 library(DT)
 R.utils::sourceDirectory("Problems", onError="warning", modifiedOnly=FALSE)
 R.utils::sourceDirectory("Solutions", onError="warning", modifiedOnly=FALSE)
+R.utils::sourceDirectory("General Functions", onError="warning", modifiedOnly=FALSE)
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
@@ -66,11 +67,11 @@ shinyUI(fluidPage(
          selectInput("c6dir", "Direction of Question", list("Random" = "random",
                                                                "Greater Than" = "greater than",
                                                                "Less Than" = "less than")), 
-         selectInput("c6type", "Type of Question", list("Random"="random", 
-                                                        "Z to Probability (basic)" = "z2p",
+         selectInput("c6type", "Type of Question", list("Z to Probability (basic)" = "z2p",
                                                         "Z to Probability (word)" = "z2p_word",
                                                         "Probability to Value" = "p2v",
-                                                        "Z to Probability (sample/clt)" = "z2p_samp"))
+                                                        "Z to Probability (sample/clt)" = "z2p_samp",
+                                                        "Random"="random"))
        ),
        
        conditionalPanel(
@@ -81,7 +82,11 @@ shinyUI(fluidPage(
                                                     ".01"=.01,
                                                     ".05"=.05,
                                                     ".10"=.10,
-                                                    ".20"=.20))
+                                                    ".20"=.20)), 
+         selectInput("c7type", "Type of Question", list("Z CI" = "z",
+                                                        "T CI" = "t",
+                                                        "P CI" = "p",
+                                                        "Random" = "random"))
        ),
        
        conditionalPanel(

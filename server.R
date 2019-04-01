@@ -13,6 +13,7 @@ library(shiny)
 library(DT)
 R.utils::sourceDirectory("Problems", onError="warning", modifiedOnly=FALSE) # I needed the modifiedOnly to be false to get this to run properly...
 R.utils::sourceDirectory("Solutions", onError="warning", modifiedOnly=FALSE)
+R.utils::sourceDirectory("General Functions", onError="warning", modifiedOnly=FALSE)
 options(width=120) #YES: this does what I want it to
 
 # Define server logic required to draw a histogram
@@ -72,13 +73,13 @@ shinyServer(function(input, output) {
     } else if (input$ch == "c5"){
       
     } else if (input$ch == "c6"){
-      prob <- c6p(direction = input$c6dir, problem=input$c6type, n=input$c6n)
+      prob <- c6p(direction = input$c6dir, prob_type=input$c6type, n=input$c6n)
       stem <- prob$stem
       data <- prob$data
       hidden_data <- prob$hidden_data
       
     } else if (input$ch == "c7"){ #need to figure out what to do for z, t, and p
-      prob <- c7p(n=input$c7n, alpha=input$c7alpha)
+      prob <- c7p(prob_type = input$c7type, n=input$c7n, alpha=input$c7alpha)
       stem <- prob$stem
       data <- prob$data
       hidden_data <- prob$hidden_data
@@ -138,7 +139,7 @@ shinyServer(function(input, output) {
       out <- c6s_text(prob_type = hdat$prob_type, hdat=hdat)
       
     } else if (input$ch == "c7"){ #need to figure out what to do for z, t, and p (currently t)
-      out <- t_ci(data = hdat$dat, alpha = hdat$alpha, dig=3)
+      out <- c7s_text(prob_type = hdat$prob_type, hdat=hdat)
       
     } else if (input$ch == "c8"){ #need to figure out what to do for z, t, and p (currently t)
       out <- t_test_steps(data = hdat$dat, direction = hdat$direction, alpha = hdat$alpha, nh = hdat$h0, dig=3)
@@ -166,8 +167,10 @@ shinyServer(function(input, output) {
     } else if (input$ch == "c5"){
       
     } else if (input$ch == "c6"){
+      out <- c6s_plot(prob_type = hdat$prob_type, hdat=hdat)
       
     } else if (input$ch == "c7"){
+      out <- c7s_plot(prob_type = hdat$prob_type, hdat=hdat)
       
     } else if (input$ch == "c8"){
       out <- cv_t_plot(direction = hdat$direction, alpha = hdat$alpha, df=length(hdat$dat) -1, tail_exp=1.1)
