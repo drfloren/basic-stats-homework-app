@@ -3,7 +3,7 @@ fr <- function(x, dig=4){
   format(round(x, digits = dig), nsmall=dig)
 }
 
-t_test_steps <- function(data, alpha, dig=3){
+t_ci <- function(data, alpha, dig=3){
   n <- length(data)
   df <- n-1
   mu <- mean(data)

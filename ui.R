@@ -8,6 +8,9 @@
 #
 
 library(shiny)
+library(DT)
+R.utils::sourceDirectory("Problems")
+R.utils::sourceDirectory("Solutions")
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(

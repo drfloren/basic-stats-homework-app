@@ -138,7 +138,7 @@ shinyServer(function(input, output) {
       out <- c6s_text(prob_type = hdat$prob_type, hdat=hdat)
       
     } else if (input$ch == "c7"){ #need to figure out what to do for z, t, and p (currently t)
-      out <- t_test_steps(data = hdat$dat, alpha = hdat$alpha, dig=3)
+      out <- t_ci(data = hdat$dat, alpha = hdat$alpha, dig=3)
       
     } else if (input$ch == "c8"){ #need to figure out what to do for z, t, and p (currently t)
       out <- t_test_steps(data = hdat$dat, direction = hdat$direction, alpha = hdat$alpha, nh = hdat$h0, dig=3)
