@@ -11,8 +11,8 @@
 
 library(shiny)
 library(DT)
-R.utils::sourceDirectory("Problems")
-R.utils::sourceDirectory("Solutions")
+R.utils::sourceDirectory("Problems", onError="warning", modifiedOnly=FALSE) # I needed the modifiedOnly to be false to get this to run properly...
+R.utils::sourceDirectory("Solutions", onError="warning", modifiedOnly=FALSE)
 options(width=120) #YES: this does what I want it to
 
 # Define server logic required to draw a histogram

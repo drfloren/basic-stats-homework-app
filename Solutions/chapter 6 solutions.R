@@ -26,7 +26,7 @@ c6s_z2p_samp <- function(direction, n, md, sdd, comp_val){
   
   # Step 2: find the area
   lt <- !(direction=="greater than")
-  s2 <- fr(pnorm(z_value, lower.tail = lt), 2)
+  s2 <- fr(pnorm(z_value, lower.tail = lt), 4)
   
   list(`Z` = s1, `Probability`=s2)
 }
