@@ -29,12 +29,12 @@ shinyUI(fluidPage(
                    "Which chapter?",
                    choices = list(#"Chapter 1" = "c1",
                                   "Chapter 2" = "c2", 
-                                  "Chapter 3" = "c3"#,
-                                  #"Chapter 4" = "c4", 
+                                  "Chapter 3" = "c3",
+                                  #"Chapter 4" = "c4"#, 
                                   #"Chapter 5" = "c5",
                                   #"Chapter 6" = "c6",
-                                  #"Chapter 7" = "c7",
-                                  #"Chapter 8" = "c8"
+                                  "Chapter 7" = "c7",
+                                  "Chapter 8" = "c8"
                                   ),
                   selected="c2"),
        
@@ -54,6 +54,30 @@ shinyUI(fluidPage(
          h3("Chapter 3 Options"),
          sliderInput("c3n", "Sample Size", min=7, max=20, value = 15),
          checkboxInput("c3bpo", "Plot Outliers in Boxplot?", value = FALSE)
+       ),
+       
+       conditionalPanel(
+         condition = "input.ch == 'c7'",
+         h3("Chapter 7 Options"),
+         sliderInput("c7n", "Sample Size", min=7, max=20, value = 15),
+         selectInput("c7alpha", "Alpha Level", list("Random" = "random",
+                                                    ".01"=.01,
+                                                    ".05"=.05,
+                                                    ".10"=.10))
+       ),
+       
+       conditionalPanel(
+         condition = "input.ch == 'c8'",
+         h3("Chapter 8 Options"),
+         sliderInput("c8n", "Sample Size", min=7, max=20, value = 15),
+         selectInput("c8dir", "Direction of Alternative", list("Random" = "random",
+                                                        "Greater Than" = "greater than",
+                                                        "Less Than" = "less than",
+                                                        "Not Equal To" = "not equal to")),
+         selectInput("c8alpha", "Alpha Level", list("Random" = "random",
+                                                    ".01"=.01,
+                                                    ".05"=.05,
+                                                    ".10"=.10))
        )
        
        #conditionalPanel().... #for the rest of the chapters' options

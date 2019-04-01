@@ -1,0 +1,512 @@
+mean(dat) + rt(1, df=2)*sd(dat)/sqrt(length(dat))
+mean(dat) + rt(1, df=2)*sd(dat)/sqrt(length(dat))
+mean(dat) + rt(1, df=2)*sd(dat)/sqrt(length(dat))
+if(is.null(n))
+n <- sample(9:15, size=1) # dont think this is neeeded: shiny will give default values anyways...
+ds <- sample(1:4, size=1) # 4 sets of problems: pick one.
+direction <- sample(c("greater than", "less than", "not equal to"), size=1) #getting direction (greater than, less than, ne to)
+dat <- list(sysbpdg(n), agedg(n), weightdg(n), heightdg(n))[[ds]]
+h0 <- mean(dat) + rt(1, df=2)*sd(dat)/sqrt(length(dat))
+n <- sample(9:15, size=1) # dont think this is neeeded: shiny will give default values anyways...
+ds <- sample(1:4, size=1) # 4 sets of problems: pick one.
+direction <- sample(c("greater than", "less than", "not equal to"), size=1) #getting direction (greater than, less than, ne to)
+dat <- list(sysbpdg(n), agedg(n), weightdg(n), heightdg(n))[[ds]]
+h0 <- mean(dat) + rt(1, df=2)*sd(dat)/sqrt(length(dat))
+stem_start <- c("Consider the data below on systolic blood pressure. Test the hypothesis that the population mean is",
+"Consider the data below on age. Test the hypothesis that the population mean is",
+"Consider the data below on weight in kilograms. Test the hypothesis that the population mean is",
+"Consider the data below on height in centimeters. Test the hypothesis that the population mean is")[ds]
+stem_middle <- direction
+stem_end <- h0
+stem <- paste(stem_start, stem_middle, stem_end)
+list(stem=stem, data=dat, hidden_data = list(h0=h0, data=dat[[ds]]))
+h0 <- round(mean(dat) + rt(1, df=2)*sd(dat)/sqrt(length(dat)), 1)
+stem_start <- c("Consider the data below on systolic blood pressure. Test the hypothesis that the population mean is",
+"Consider the data below on weight in kilograms. Test the hypothesis that the population mean is",
+"Consider the data below on height in centimeters. Test the hypothesis that the population mean is")[ds]
+stem_end <- h0
+stem <- paste(stem_start, stem_middle, stem_end)
+"Consider the data below on age. Test the hypothesis that the population mean is",
+stem_middle <- direction
+h0
+stem_start <- c("Consider the data below on systolic blood pressure. Test the hypothesis that the population mean is",
+"Consider the data below on age. Test the hypothesis that the population mean is",
+"Consider the data below on weight in kilograms. Test the hypothesis that the population mean is",
+"Consider the data below on height in centimeters. Test the hypothesis that the population mean is")[ds]
+stem_middle <- direction
+stem_end <- h0
+stem <- paste(stem_start, stem_middle, stem_end)
+list(stem=stem, data=dat, hidden_data = list(h0=h0, data=dat[[ds]]))
+stem_end <- paste0(h0, ".")
+stem <- paste(stem_start, stem_middle, stem_end)
+list(stem=stem, data=dat, hidden_data = list(h0=h0, data=dat[[ds]]))
+dim(iris)
+c7p <- function(n=NULL){
+if(is.null(n))
+n <- sample(9:15, size=1) # dont think this is neeeded: shiny will give default values anyways...
+ds <- sample(1:4, size=1) # 4 sets of problems: pick one.
+direction <- sample(c("greater than", "less than", "not equal to"), size=1) #getting direction (greater than, less than, ne to)
+alpha <- sample(c(0.01, 0.05, 0.10), size=1)
+dat <- list(sysbpdg(n), agedg(n), weightdg(n), heightdg(n))[[ds]]
+h0 <- round(mean(dat) + rt(1, df=2)*sd(dat)/sqrt(length(dat)), 1)
+stem_start <- c("Consider the data below on systolic blood pressure. Test the hypothesis that the population mean is",
+"Consider the data below on age. Test the hypothesis that the population mean is",
+"Consider the data below on weight in kilograms. Test the hypothesis that the population mean is",
+"Consider the data below on height in centimeters. Test the hypothesis that the population mean is")[ds]
+stem_middle <- direction
+stem_end <- paste0(h0, " at the alpha=", alpha, " level.")
+stem <- paste(stem_start, stem_middle, stem_end)
+list(stem=stem, data=dat, hidden_data = list(h0=h0, data=dat[[ds]]))
+}
+c7p
+c7p()
+c7p()
+c7p()
+c7p <- function(n=NULL){
+if(is.null(n))
+n <- sample(9:15, size=1) # dont think this is neeeded: shiny will give default values anyways...
+ds <- sample(1:4, size=1) # 4 sets of problems: pick one.
+direction <- sample(c("greater than", "less than", "not equal to"), size=1) #getting direction (greater than, less than, ne to)
+alpha <- sample(c(0.01, 0.05, 0.10), size=1)
+dat <- list(sysbpdg(n), agedg(n), weightdg(n), heightdg(n))[[ds]]
+h0 <- round(mean(dat) + rt(1, df=2)*sd(dat)/sqrt(length(dat)), 1)
+stem_start <- c("Consider the data below on systolic blood pressure. Test the hypothesis that the population mean is",
+"Consider the data below on age. Test the hypothesis that the population mean is",
+"Consider the data below on weight in kilograms. Test the hypothesis that the population mean is",
+"Consider the data below on height in centimeters. Test the hypothesis that the population mean is")[ds]
+stem_middle <- direction
+stem_end <- paste0(h0, " at the alpha=", alpha, " level.")
+stem <- paste(stem_start, stem_middle, stem_end)
+list(stem=stem, data=dat, hidden_data = list(h0=h0, alpha=alpha, data=dat))
+}
+c7p()
+c7p()
+c7p()
+c7p()
+c7p()
+c7p()
+c7p()
+c7p()
+c7p()
+c7p()
+c7p()
+c7p()
+c7p <- function(n=NULL, direction=c(NULL, "greater than", "less than", "not equal to")){
+if(is.null(n))
+n <- sample(9:15, size=1) # dont think this is neeeded: shiny will give default values anyways...
+ds <- sample(1:4, size=1) # 4 sets of problems: pick one.
+direction <- sample(c("greater than", "less than", "not equal to"), size=1) #getting direction (greater than, less than, ne to)
+alpha <- sample(c(0.01, 0.05, 0.10), size=1)
+dat <- list(sysbpdg(n), agedg(n), weightdg(n), heightdg(n))[[ds]]
+h0 <- round(mean(dat) + rt(1, df=2)*sd(dat)/sqrt(length(dat)), 1)
+stem_start <- c("Consider the data below on systolic blood pressure. Test the hypothesis that the population mean is",
+"Consider the data below on age. Test the hypothesis that the population mean is",
+"Consider the data below on weight in kilograms. Test the hypothesis that the population mean is",
+"Consider the data below on height in centimeters. Test the hypothesis that the population mean is")[ds]
+stem_middle <- direction
+stem_end <- expression(paste0(h0, " at the alpha=", alpha, " level."))
+stem <- paste(stem_start, stem_middle, stem_end)
+list(stem=stem, data=dat, hidden_data = list(h0=h0, alpha=alpha, data=dat))
+}
+c7p()
+c7p <- function(n=NULL, direction=c(NULL, "greater than", "less than", "not equal to")){
+if(is.null(n))
+n <- sample(9:15, size=1) # dont think this is neeeded: shiny will give default values anyways...
+ds <- sample(1:4, size=1) # 4 sets of problems: pick one.
+direction <- sample(c("greater than", "less than", "not equal to"), size=1) #getting direction (greater than, less than, ne to)
+alpha <- sample(c(0.01, 0.05, 0.10), size=1)
+dat <- list(sysbpdg(n), agedg(n), weightdg(n), heightdg(n))[[ds]]
+h0 <- round(mean(dat) + rt(1, df=2)*sd(dat)/sqrt(length(dat)), 1)
+stem_start <- c("Consider the data below on systolic blood pressure. Test the hypothesis that the population mean is",
+"Consider the data below on age. Test the hypothesis that the population mean is",
+"Consider the data below on weight in kilograms. Test the hypothesis that the population mean is",
+"Consider the data below on height in centimeters. Test the hypothesis that the population mean is")[ds]
+stem_middle <- direction
+stem_end <- expression(paste0(h0, " at the alpha=", alpha, " level."))
+stem <- expression(paste(stem_start, stem_middle, stem_end))
+list(stem=stem, data=dat, hidden_data = list(h0=h0, alpha=alpha, data=dat))
+}
+c7p()
+shiny::runApp()
+runApp()
+runApp()
+"test" %in% c("greater than", "less than", "not equal to")
+"greater than" %in% c("greater than", "less than", "not equal to")
+is.numeric("tests")
+is.numeric(0.01)
+c7p <- function(n=NULL, direction="random", rand_alpha=TRUE, set_alpha=0.05){
+if(is.null(n))
+n <- sample(9:15, size=1) # dont think this is neeeded: shiny will give default values anyways...
+ds <- sample(1:4, size=1) # 4 sets of problems: pick one.
+if(direction=="random")
+direction <- sample(c("greater than", "less than", "not equal to"), size=1) #getting direction (greater than, less than, ne to)
+if(!(direction %in% c("random", "greater than", "less than", "not equal to")))
+stop('Direction must be "random", "greater than", "less than", or "not equal to".')
+if(rand_alpha){
+alpha <- sample(c(0.01, 0.05, 0.10), size=1)
+} else {
+alpha <- set_alpha
+if(set_alpha>=1 | set_alpha<=0 | !is.numeric(set_alpha))
+stop("set_alpha must be a number between 0 and 1 (usually 0.05).")
+}
+dat <- list(sysbpdg(n), agedg(n), weightdg(n), heightdg(n))[[ds]]
+h0 <- round(mean(dat) + rt(1, df=2)*sd(dat)/sqrt(length(dat)), 1)
+stem_start <- c("Consider the data below on systolic blood pressure. Test the hypothesis that the population mean is",
+"Consider the data below on age. Test the hypothesis that the population mean is",
+"Consider the data below on weight in kilograms. Test the hypothesis that the population mean is",
+"Consider the data below on height in centimeters. Test the hypothesis that the population mean is")[ds]
+stem_middle <- direction
+stem_end <- paste0(h0, " at the alpha=", alpha, " level.")
+stem <- paste(stem_start, stem_middle, stem_end)
+list(stem=stem, data=dat, hidden_data = list(h0=h0, alpha=alpha, data=dat))
+}
+c7p()
+c7p()
+c7p()
+c7p(direction = "less tha")
+c7p(direction = "less than")
+set.seed(1)
+c7p(direction = "less than")
+set.seed(1)
+c7p()
+c7p <- function(n=NULL, direction="random", rand_alpha=TRUE, set_alpha=0.05){
+if(is.null(n))
+n <- sample(9:15, size=1) # dont think this is neeeded: shiny will give default values anyways...
+ds <- sample(1:4, size=1) # 4 sets of problems: pick one.
+dat <- list(sysbpdg(n), agedg(n), weightdg(n), heightdg(n))[[ds]]
+if(direction=="random")
+direction <- sample(c("greater than", "less than", "not equal to"), size=1) #getting direction (greater than, less than, ne to)
+if(!(direction %in% c("random", "greater than", "less than", "not equal to")))
+stop('Direction must be "random", "greater than", "less than", or "not equal to".')
+if(rand_alpha){
+alpha <- sample(c(0.01, 0.05, 0.10), size=1)
+} else {
+alpha <- set_alpha
+if(set_alpha>=1 | set_alpha<=0 | !is.numeric(set_alpha))
+stop("set_alpha must be a number between 0 and 1 (usually 0.05).")
+}
+h0 <- round(mean(dat) + rt(1, df=2)*sd(dat)/sqrt(length(dat)), 1)
+stem_start <- c("Consider the data below on systolic blood pressure. Test the hypothesis that the population mean is",
+"Consider the data below on age. Test the hypothesis that the population mean is",
+"Consider the data below on weight in kilograms. Test the hypothesis that the population mean is",
+"Consider the data below on height in centimeters. Test the hypothesis that the population mean is")[ds]
+stem_middle <- direction
+stem_end <- paste0(h0, " at the alpha=", alpha, " level.")
+stem <- paste(stem_start, stem_middle, stem_end)
+list(stem=stem, data=dat, hidden_data = list(h0=h0, alpha=alpha, data=dat))
+}
+set.seed(1)
+c7p(direction = "less than")
+set.seed(1)
+c7p()
+c7p <- function(n=NULL, direction="random", rand_alpha=TRUE, set_alpha=0.05){
+if(is.null(n))
+n <- sample(9:15, size=1) # dont think this is neeeded: shiny will give default values anyways...
+ds <- sample(1:4, size=1) # 4 sets of problems: pick one.
+dat <- list(sysbpdg(n), agedg(n), weightdg(n), heightdg(n))[[ds]] #do these two first so that we can play around with the direction and alpha without changing the data or the null hypothesis (ie we can look at a problem, then change the direction and alpha as desired while keeping that dataset).
+h0 <- round(mean(dat) + rt(1, df=2)*sd(dat)/sqrt(length(dat)), 1)
+if(direction=="random")
+direction <- sample(c("greater than", "less than", "not equal to"), size=1) #getting direction (greater than, less than, ne to)
+if(!(direction %in% c("random", "greater than", "less than", "not equal to")))
+stop('Direction must be "random", "greater than", "less than", or "not equal to".')
+if(rand_alpha){
+alpha <- sample(c(0.01, 0.05, 0.10), size=1)
+} else {
+alpha <- set_alpha
+if(set_alpha>=1 | set_alpha<=0 | !is.numeric(set_alpha))
+stop("set_alpha must be a number between 0 and 1 (usually 0.05).")
+}
+stem_start <- c("Consider the data below on systolic blood pressure. Test the hypothesis that the population mean is",
+"Consider the data below on age. Test the hypothesis that the population mean is",
+"Consider the data below on weight in kilograms. Test the hypothesis that the population mean is",
+"Consider the data below on height in centimeters. Test the hypothesis that the population mean is")[ds]
+stem_middle <- direction
+stem_end <- paste0(h0, " at the alpha=", alpha, " level.")
+stem <- paste(stem_start, stem_middle, stem_end)
+list(stem=stem, data=dat, hidden_data = list(h0=h0, alpha=alpha, data=dat))
+}
+c7p()
+set.seed(1)
+c7p(direction = "less than")
+set.seed(1)
+c7p()
+c7p <- function(n=NULL, direction="random", rand_alpha=TRUE, set_alpha=0.05){
+if(is.null(n))
+n <- sample(9:15, size=1) # dont think this is neeeded: shiny will give default values anyways...
+ds <- sample(1:4, size=1) # 4 sets of problems: pick one.
+dat <- list(sysbpdg(n), agedg(n), weightdg(n), heightdg(n))[[ds]] #do these two first so that we can play around with the direction and alpha without changing the data or the null hypothesis (ie we can look at a problem, then change the direction and alpha as desired while keeping that dataset).
+h0 <- round(mean(dat) + rt(1, df=2)*sd(dat)/sqrt(length(dat)), 1)
+alpha <- sample(c(0.01, 0.05, 0.10), size=1) #set this just in case (change later if we are using a fixed one). Setting here allows changes without affecting randomization at all
+if(direction=="random")
+#getting direction (greater than, less than, ne to)
+if(!(direction %in% c("random", "greater than", "less than", "not equal to")))
+stop('Direction must be "random", "greater than", "less than", or "not equal to".')
+if(!rand_alpha){
+alpha <- set_alpha
+if(set_alpha>=1 | set_alpha<=0 | !is.numeric(set_alpha)) #only need to check if the user sets alpha themselves.
+stop("set_alpha must be a number between 0 and 1 (usually 0.05).")
+}
+stem_start <- c("Consider the data below on systolic blood pressure. Test the hypothesis that the population mean is",
+"Consider the data below on age. Test the hypothesis that the population mean is",
+"Consider the data below on weight in kilograms. Test the hypothesis that the population mean is",
+"Consider the data below on height in centimeters. Test the hypothesis that the population mean is")[ds]
+stem_middle <- direction
+stem_end <- paste0(h0, " at the alpha=", alpha, " level.")
+stem <- paste(stem_start, stem_middle, stem_end)
+list(stem=stem, data=dat, hidden_data = list(h0=h0, alpha=alpha, data=dat))
+}
+set.seed(1)
+c7p()
+set.seed(1)
+c7p(direction = "less than")
+c7p <- function(n=NULL, direction="random", rand_alpha=TRUE, set_alpha=0.05){
+if(is.null(n))
+n <- sample(9:15, size=1) # dont think this is neeeded: shiny will give default values anyways...
+ds <- sample(1:4, size=1) # 4 sets of problems: pick one.
+dat <- list(sysbpdg(n), agedg(n), weightdg(n), heightdg(n))[[ds]] #do these two first so that we can play around with the direction and alpha without changing the data or the null hypothesis (ie we can look at a problem, then change the direction and alpha as desired while keeping that dataset).
+h0 <- round(mean(dat) + rt(1, df=2)*sd(dat)/sqrt(length(dat)), 1)
+alpha <- sample(c(0.01, 0.05, 0.10), size=1) #set this just in case (change later if we are using a fixed one). Setting here allows changes without out affecting randomization at all
+if(direction=="random")
+#getting direction (greater than, less than, ne to)
+direction <- sample(c("greater than", "less than", "not equal to"), size=1)
+if(!(direction %in% c("random", "greater than", "less than", "not equal to")))
+stop('Direction must be "random", "greater than", "less than", or "not equal to".')
+if(!rand_alpha){
+alpha <- set_alpha
+if(set_alpha>=1 | set_alpha<=0 | !is.numeric(set_alpha)) #only need to check if the user sets alpha themselves.
+stop("set_alpha must be a number between 0 and 1 (usually 0.05).")
+}
+stem_start <- c("Consider the data below on systolic blood pressure. Test the hypothesis that the population mean is",
+"Consider the data below on age. Test the hypothesis that the population mean is",
+"Consider the data below on weight in kilograms. Test the hypothesis that the population mean is",
+"Consider the data below on height in centimeters. Test the hypothesis that the population mean is")[ds]
+stem_middle <- direction
+stem_end <- paste0(h0, " at the alpha=", alpha, " level.")
+stem <- paste(stem_start, stem_middle, stem_end)
+list(stem=stem, data=dat, hidden_data = list(h0=h0, alpha=alpha, data=dat))
+}
+set.seed(1)
+c7p()
+set.seed(1)
+c7p(direction = "less than")
+c7p(direction = "greater than")
+set.seed(1)
+c7p(direction = "less than")
+set.seed(1)
+set.seed(1)
+c7p(direction = "greater than")
+set.seed(1)
+c7p()
+c7p <- function(n=NULL, direction="random", rand_alpha=TRUE, set_alpha=0.05){
+if(is.null(n))
+n <- sample(9:15, size=1) # dont think this is neeeded: shiny will give default values anyways...
+ds <- sample(1:4, size=1) # 4 sets of problems: pick one.
+dat <- list(sysbpdg(n), agedg(n), weightdg(n), heightdg(n))[[ds]] #do these two first so that we can play around with the direction and alpha without changing the data or the null hypothesis (ie we can look at a problem, then change the direction and alpha as desired while keeping that dataset).
+h0 <- round(mean(dat) + rt(1, df=2)*sd(dat)/sqrt(length(dat)), 1)
+alpha <- sample(c(0.01, 0.05, 0.10), size=1) #set this just in case (change later if we are using a fixed one). Setting here allows changes without out affecting randomization at all.
+rdirection <- sample(c("greater than", "less than", "not equal to"), size=1) #do this here too (not needed, but just cause so that all randomization is done every time, and fixed values are set later if needed)
+if(direction=="random")
+#getting direction (greater than, less than, ne to)
+direction <- rdirection
+if(!(direction %in% c("random", "greater than", "less than", "not equal to")))
+stop('Direction must be "random", "greater than", "less than", or "not equal to".')
+if(!rand_alpha){
+alpha <- set_alpha
+if(set_alpha>=1 | set_alpha<=0 | !is.numeric(set_alpha)) #only need to check if the user sets alpha themselves.
+stop("set_alpha must be a number between 0 and 1 (usually 0.05).")
+}
+stem_start <- c("Consider the data below on systolic blood pressure. Test the hypothesis that the population mean is",
+"Consider the data below on age. Test the hypothesis that the population mean is",
+"Consider the data below on weight in kilograms. Test the hypothesis that the population mean is",
+"Consider the data below on height in centimeters. Test the hypothesis that the population mean is")[ds]
+stem_middle <- direction
+stem_end <- paste0(h0, " at the alpha=", alpha, " level.")
+stem <- paste(stem_start, stem_middle, stem_end)
+list(stem=stem, data=dat, hidden_data = list(h0=h0, alpha=alpha, data=dat))
+}
+c7p()
+c7p <- function(n=NULL, direction="random", alpha="random"){
+if(is.null(n))
+n <- sample(9:15, size=1) # dont think this is neeeded: shiny will give default values anyways...
+ds <- sample(1:4, size=1) # 4 sets of problems: pick one.
+dat <- list(sysbpdg(n), agedg(n), weightdg(n), heightdg(n))[[ds]] #do these two first so that we can play around with the direction and alpha without changing the data or the null hypothesis (ie we can look at a problem, then change the direction and alpha as desired while keeping that dataset).
+h0 <- round(mean(dat) + rt(1, df=2)*sd(dat)/sqrt(length(dat)), 1)
+ralpha <- sample(c(0.01, 0.05, 0.10), size=1) #set this just in case (change later if we are using a fixed one). Setting here allows changes without out affecting randomization at all.
+rdirection <- sample(c("greater than", "less than", "not equal to"), size=1) #do this here too (not needed, but just cause so that all randomization is done every time, and fixed values are set later if needed)
+if(direction=="random")
+#getting direction (greater than, less than, ne to)
+direction <- rdirection
+if(!(direction %in% c("random", "greater than", "less than", "not equal to")))
+stop('Direction must be "random", "greater than", "less than", or "not equal to".')
+if(alpha=="random"){
+alpha <- ralpha
+} else if(alpha!="random"){ #if alpha isn't random, check that it is right
+if(alpha>=1 | alpha<=0 | !is.numeric(alpha)) #only need to check if the user sets alpha themselves.
+stop("alpha must be a number between 0 and 1 (usually 0.05).")
+}
+stem_start <- c("Consider the data below on systolic blood pressure. Test the hypothesis that the population mean is",
+"Consider the data below on age. Test the hypothesis that the population mean is",
+"Consider the data below on weight in kilograms. Test the hypothesis that the population mean is",
+"Consider the data below on height in centimeters. Test the hypothesis that the population mean is")[ds]
+stem_middle <- direction
+stem_end <- paste0(h0, " at the alpha=", alpha, " level.")
+stem <- paste(stem_start, stem_middle, stem_end)
+list(stem=stem, data=dat, hidden_data = list(h0=h0, alpha=alpha, data=dat))
+}
+c7p(alpha=1)
+c7p(alpha=.01)
+c7p(alpha=.51)
+c7p()
+c7p()
+c7p()
+c7p()
+c7p()
+library(shiny)
+?selectInput
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+alpha=.05
+if(alpha>=1 | alpha<=0) #only need to check if the user sets alpha themselves.
+stop("alpha must be a number between 0 and 1 (usually 0.05).")
+runApp()
+runApp()
+qt(.025,1)
+x <- seq(lower_bound, upper_bound, by=.01)
+lower_bound <- qt(alpha/2, df=df)*1.1
+upper_bound <- qt(1-alpha/2, df=df)*1.1
+x <- seq(lower_bound, upper_bound, by=.01)
+alpha=.05
+lower_bound <- qnorm(alpha/2)*1.1
+upper_bound <- qnorm(1-alpha/2)*1.1
+x <- seq(lower_bound, upper_bound, by=.01)
+plot(x, dnorm(x))
+x
+range(x)
+abline(v=alpha/2)
+abline(v=qnorm(alpha/2))
+cv_graphic <- function(type, direction, alpha, ts=NULL, df=NULL, tail_exp=1.1){
+# checking on df if it is a t-test
+if(type="t" & is.null(df))
+stop("Need degrees of freedom for the t-test.")
+# setting the graph title and bounds (using two tailed edges for bounds on graphic)
+if (type=="t"){
+gt <- "T-Distribution for the T-Test"
+lower_bound <- qt(alpha/2, df=df)*tail_exp
+upper_bound <- qt(1-alpha/2, df=df)*tail_exp
+x <- seq(lower_bound, upper_bound, by=.01)
+y <- dt(x, df=df)
+} else if (type="z"){
+gt <- "Z-Distribution for the Z-Test"
+lower_bound <- qnorm(alpha/2)*tail_exp
+upper_bound <- qnorm(1-alpha/2)*tail_exp
+x <- seq(lower_bound, upper_bound, by=.01)
+y <- dnorm(x)
+} else if (type="p"){
+gt <- "Z-Distribution for the Test of Proportion"
+lower_bound <- qnorm(alpha/2)*tail_exp
+upper_bound <- qnorm(1-alpha/2)*tail_exp
+x <- seq(lower_bound, upper_bound, by=.01)
+y <- dnorm(x)
+}
+plot(x, y, main=gt, type="l")
+if(!is.null(ts))
+abline(v=ts)
+}
+cv_graphic <- function(type, direction, alpha, ts=NULL, df=NULL, tail_exp=1.1){
+# checking on df if it is a t-test
+if(type="t" & is.null(df))
+stop("Need degrees of freedom for the t-test.")
+# setting the graph title and bounds (using two tailed edges for bounds on graphic)
+if (type=="t"){
+gt <- "T-Distribution for the T-Test"
+lower_bound <- qt(alpha/2, df=df)*tail_exp
+upper_bound <- qt(1-alpha/2, df=df)*tail_exp
+x <- seq(lower_bound, upper_bound, by=.01)
+y <- dt(x, df=df)
+} else if (type="z"){
+gt <- "Z-Distribution for the Z-Test"
+lower_bound <- qnorm(alpha/2)*tail_exp
+upper_bound <- qnorm(1-alpha/2)*tail_exp
+x <- seq(lower_bound, upper_bound, by=.01)
+y <- dnorm(x)
+} else if (type="p"){
+gt <- "Z-Distribution for the Test of Proportion"
+lower_bound <- qnorm(alpha/2)*tail_exp
+upper_bound <- qnorm(1-alpha/2)*tail_exp
+x <- seq(lower_bound, upper_bound, by=.01)
+y <- dnorm(x)
+}
+plot(x, y, main=gt, type="l")
+if(!is.null(ts))
+abline(v=ts)
+}
+cv_graphic <- function(type, direction, alpha, ts=NULL, df=NULL, tail_exp=1.1){
+# checking on df if it is a t-test
+if(type="t" & is.null(df))
+stop("Need degrees of freedom for the t-test.")
+# setting the graph title and bounds (using two tailed edges for bounds on graphic)
+if (type=="t"){
+gt <- "T-Distribution for the T-Test"
+lower_bound <- qt(alpha/2, df=df)*tail_exp
+upper_bound <- qt(1-alpha/2, df=df)*tail_exp
+x <- seq(lower_bound, upper_bound, by=.01)
+y <- dt(x, df=df)
+} else if (type="z"){
+gt <- "Z-Distribution for the Z-Test"
+lower_bound <- qnorm(alpha/2)*tail_exp
+upper_bound <- qnorm(1-alpha/2)*tail_exp
+x <- seq(lower_bound, upper_bound, by=.01)
+y <- dnorm(x)
+} else if (type="p"){
+gt <- "Z-Distribution for the Test of Proportion"
+lower_bound <- qnorm(alpha/2)*tail_exp
+upper_bound <- qnorm(1-alpha/2)*tail_exp
+x <- seq(lower_bound, upper_bound, by=.01)
+y <- dnorm(x)
+}
+plot(x, y, main=gt, type="l")
+if(!is.null(ts))
+abline(v=ts)
+}
+cv_graphic <- function(type, direction, alpha, ts=NULL, df=NULL, tail_exp=1.1){
+# checking on df if it is a t-test
+if(type=="t" & is.null(df))
+stop("Need degrees of freedom for the t-test.")
+# setting the graph title and bounds (using two tailed edges for bounds on graphic)
+if (type=="t"){
+gt <- "T-Distribution for the T-Test"
+lower_bound <- qt(alpha/2, df=df)*tail_exp
+upper_bound <- qt(1-alpha/2, df=df)*tail_exp
+x <- seq(lower_bound, upper_bound, by=.01)
+y <- dt(x, df=df)
+} else if (type=="z"){
+gt <- "Z-Distribution for the Z-Test"
+lower_bound <- qnorm(alpha/2)*tail_exp
+upper_bound <- qnorm(1-alpha/2)*tail_exp
+x <- seq(lower_bound, upper_bound, by=.01)
+y <- dnorm(x)
+} else if (type=="p"){
+gt <- "Z-Distribution for the Test of Proportion"
+lower_bound <- qnorm(alpha/2)*tail_exp
+upper_bound <- qnorm(1-alpha/2)*tail_exp
+x <- seq(lower_bound, upper_bound, by=.01)
+y <- dnorm(x)
+}
+plot(x, y, main=gt, type="l")
+if(!is.null(ts))
+abline(v=ts)
+}
+cv_graphic(type="t", direction="b", alpha=.05)
+cv_graphic(type="t", direction="b", alpha=.05, df=10)
+cv_graphic(type="t", direction="b", alpha=.05, df=10, ts=2.2)

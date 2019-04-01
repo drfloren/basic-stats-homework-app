@@ -55,17 +55,17 @@ shinyServer(function(input, output) {
       if(input$c2catcont=="cont"){
         prob <- c2contp(n=input$c2n)
         stem <- prob$stem
-        data <- prob$data
+        data <- hidden_data <- prob$data
       } else { #if not continuous
         prob <- c2catp(n=input$c2n)
         stem <- prob$stem
-        data <- prob$data
+        data <- hidden_data <- prob$data
       }
       
     } else if (input$ch == "c3"){
       prob <- c3p(n=input$c3n)
       stem <- prob$stem
-      data <- prob$data
+      data <- hidden_data <- prob$data
       
     } else if (input$ch == "c4"){
       
@@ -73,13 +73,21 @@ shinyServer(function(input, output) {
       
     } else if (input$ch == "c6"){
       
-    } else if (input$ch == "c7"){
+    } else if (input$ch == "c7"){ #need to figure out what to do for z, t, and p
+      prob <- c7p(n=input$c7n, alpha=input$c7alpha)
+      stem <- prob$stem
+      data <- prob$data
+      hidden_data <- prob$hidden_data
       
-    } else if (input$ch == "c8"){
+    } else if (input$ch == "c8"){ #need to figure out what to do for z, t, and p
+      prob <- c8p(n=input$c8n, direction=input$c8dir, alpha=input$c8alpha)
+      stem <- prob$stem
+      data <- prob$data
+      hidden_data <- prob$hidden_data
       
     }
     
-    list(stem=stem, data=data)
+    list(stem=stem, data=data, hidden_data=hidden_data)
   })
   
   output$problem <- renderUI({
@@ -104,6 +112,7 @@ shinyServer(function(input, output) {
   
   output$solutiontext <- renderPrint({
     dat  <- probdat()$data
+    hdat <- probdat()$hidden_data
     out <- "" #default output
     if(input$ch == "c1"){
       
@@ -123,16 +132,18 @@ shinyServer(function(input, output) {
       
     } else if (input$ch == "c6"){
       
-    } else if (input$ch == "c7"){
+    } else if (input$ch == "c7"){ #need to figure out what to do for z, t, and p (currently t)
+      out <- t_test_steps(data = hdat$dat, alpha = hdat$alpha, dig=3)
       
-    } else if (input$ch == "c8"){
-      
+    } else if (input$ch == "c8"){ #need to figure out what to do for z, t, and p (currently t)
+      out <- t_test_steps(data = hdat$dat, direction = hdat$direction, alpha = hdat$alpha, nh = hdat$h0, dig=3)
     }
     out
   })
   
   output$solutionplot <- renderPlot({
     dat  <- probdat()$data
+    hdat <- probdat()$hidden_data
     if(input$ch == "c1"){
       
     } else if(input$ch == "c2"){
@@ -154,7 +165,7 @@ shinyServer(function(input, output) {
     } else if (input$ch == "c7"){
       
     } else if (input$ch == "c8"){
-      
+      out <- cv_t_plot(direction = hdat$direction, alpha = hdat$alpha, df=length(hdat$dat) -1, tail_exp=1.1)
     }
   })
   
