@@ -80,7 +80,8 @@ shinyUI(fluidPage(
          selectInput("c7alpha", "Alpha Level", list("Random" = "random",
                                                     ".01"=.01,
                                                     ".05"=.05,
-                                                    ".10"=.10))
+                                                    ".10"=.10,
+                                                    ".20"=.20))
        ),
        
        conditionalPanel(
