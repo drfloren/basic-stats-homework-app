@@ -67,11 +67,11 @@ shinyUI(fluidPage(
          selectInput("c6dir", "Direction of Question", list("Random" = "random",
                                                                "Greater Than" = "greater than",
                                                                "Less Than" = "less than")), 
-         selectInput("c6type", "Type of Question", list("Z to Probability (basic)" = "z2p",
+         selectInput("c6type", "Type of Question", list("Random"="random",
+                                                        "Z to Probability (basic)" = "z2p",
                                                         "Z to Probability (word)" = "z2p_word",
                                                         "Probability to Value" = "p2v",
-                                                        "Z to Probability (sample/clt)" = "z2p_samp",
-                                                        "Random"="random"))
+                                                        "Z to Probability (sample/clt)" = "z2p_samp"))
        ),
        
        conditionalPanel(
@@ -83,10 +83,10 @@ shinyUI(fluidPage(
                                                     ".05"=.05,
                                                     ".10"=.10,
                                                     ".20"=.20)), 
-         selectInput("c7type", "Type of Question", list("Z CI" = "z",
+         selectInput("c7type", "Type of Question", list("Random" = "random",
+                                                        "Z CI" = "z",
                                                         "T CI" = "t",
-                                                        "P CI" = "p",
-                                                        "Random" = "random"))
+                                                        "P CI" = "p"))
        ),
        
        conditionalPanel(
