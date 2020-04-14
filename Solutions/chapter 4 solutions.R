@@ -20,4 +20,23 @@ c4s_cards_b <- function(type, id){
        `Probability`= fr(sum(deck_of_cards[[type]]==id)/52, 4))
 }
 
+c4s_cards_bascomp <- function(type, id){
+  list(`Equation`=paste0("1-P(x)"),
+       `Fraction`= paste0(52-sum(deck_of_cards[[type]]==id),"/52"),
+       `Reduced Fraction`= paste0(MASS::fractions((52-sum(deck_of_cards[[type]]==id))/52)),
+       `Probability`= fr((52-sum(deck_of_cards[[type]]==id))/52, 4))
+}
+
+# c4s_cards_advcomp <- function(type, id, n){
+#   list(`Equation`=paste0("1-P(0)"),@
+#        `Fraction`= paste0("1-(",52-sum(deck_of_cards[[type]]==id),"/52)^",n, " = 1-", (52-sum(deck_of_cards[[type]]==id))^5, "/", (52^5), " = ", 1-(52-sum(deck_of_cards[[type]]==id))^5/(52^5)),
+#        `Reduced Fraction`= paste0(MASS::fractions((52-sum(deck_of_cards[[type]]==id))/52)),
+#        `Probability`= fr((52-sum(deck_of_cards[[type]]==id))/52, 4))
+# }
+# foo <-  c4p_cards_advcomp
+# foo$stem
+# c4s_cards_advcomp(foo$hidden_data$type, foo$hidden_data$id, foo$hidden_data$n)
+# 
+# 13 12 11 10 /
+#   52 51 50 49
 

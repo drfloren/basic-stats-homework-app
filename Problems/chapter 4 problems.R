@@ -14,8 +14,13 @@ approp <- structure(c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 
 # Cards ----
 # source("General Functions/cards.r")
+# basic probability
 c4p_cards_basic <- function(type="random"){
-  type <- sample(c("suit", "value"), size=1)
+  if(type=="random")
+    type <- sample(c("suit", "value"), size=1)
+  if(!(type=="suit" | type=="value"))
+    stop("type must be random, suit, or value.")
+  
   id <- as.character(sample(deck_of_cards[[type]], 1))
   id_stem <- id
   if(type=="suit")
@@ -27,5 +32,46 @@ c4p_cards_basic <- function(type="random"){
        hidden_data=list(type=type,
                         id=id))
 }
+
+#basic compliment
+c4p_cards_bascomp <- function(type="random"){
+  if(type=="random")
+    type <- sample(c("suit", "value"), size=1)
+  if(!(type=="suit" | type=="value"))
+    stop("type must be random, suit, or value.")
+  
+  id <- as.character(sample(deck_of_cards[[type]], 1))
+  id_stem <- id
+  if(type=="suit")
+    id_stem <- substr(id, start=1, stop=nchar(id)-1)
+  stem <- paste0("Find the probability that a card is not a ", id_stem, ".")
+  
+  list(stem=stem,
+       data="",
+       hidden_data=list(type=type,
+                        id=id))
+}
+
+#advanced complement
+# c4p_cards_advcomp <- function(type="random", n=NULL){
+#   if(type=="random")
+#     type <- sample(c("suit", "value"), size=1)
+#   if(!(type=="suit" | type=="value"))
+#     stop("type must be random, suit, or value.")
+#   if(is.null(n))
+#     n <- sample(2:5, 1)
+#   
+#   id <- as.character(sample(deck_of_cards[[type]], 1))
+#   id_stem <- id
+#   if(type=="suit")
+#     id_stem <- substr(id, start=1, stop=nchar(id)-1)
+#   stem <- paste0("If ", n, " cards are drawn, find the probability that least one ", id_stem, " is drawn.")
+#   
+#   list(stem=stem,
+#        data="",
+#        hidden_data=list(type=type,
+#                         id=id,
+#                         n=n))
+# }
 
 
