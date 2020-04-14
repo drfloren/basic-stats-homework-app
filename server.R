@@ -16,7 +16,7 @@ R.utils::sourceDirectory("Solutions", onError="warning", modifiedOnly=FALSE)
 R.utils::sourceDirectory("General Functions", onError="warning", modifiedOnly=FALSE)
 options(width=120) #YES: this does what I want it to
 
-# Define server logic required to draw a histogram
+# Define server logic
 shinyServer(function(input, output) {
   # Setting the problem number
   probnum <- reactiveVal()
@@ -26,6 +26,7 @@ shinyServer(function(input, output) {
   })
   
   observeEvent(input$newprob, {
+    rm(.Random.seed, envir=globalenv())#reset the seed... I'm not 100% sure what was going on, but due to using this value to set the seed, there was a loop occuring among the random values (in C7, alpha=0.01, p CIs). I think certain values looped back to their beginning. This creates a truly random starting place when the random button is hit next (literally erases the previous seed so that it isn't dependent on it and can't get wrapped in a loop with it).
     npn <- sample(1:1000, size=1) #new problem number
     probnum(npn)
   })
