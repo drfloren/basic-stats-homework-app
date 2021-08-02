@@ -1,1 +1,1 @@
-# mth115-homework
+# Basic Statistics Course Homework Application
