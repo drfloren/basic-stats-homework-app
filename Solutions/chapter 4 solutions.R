@@ -13,7 +13,7 @@ approp <- structure(c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
                                                                                     "Balls", "Coins", "Die", "Empirical")))
 
 # Cards ----
-c4s_cards_b <- function(type, id){
+c4s_cards_basic <- function(type, id){
   list(`Equation`=paste0("(#Success)/(#Total)"),
        `Fraction`= paste0(sum(deck_of_cards[[type]]==id),"/52"),
        `Reduced Fraction`= paste0(MASS::fractions(sum(deck_of_cards[[type]]==id)/52)),
