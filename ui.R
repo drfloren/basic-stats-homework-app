@@ -17,7 +17,7 @@ R.utils::sourceDirectory("General Functions", onError="warning", modifiedOnly=FA
 shinyUI(fluidPage(
   
   # Application title
-  titlePanel("MTH 115 Homework"),
+  titlePanel("Basic Stats Homework App"),
   
   # Sidebar
   sidebarLayout(
