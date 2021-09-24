@@ -9,7 +9,7 @@ md <- function(dat){ #mode function
 }
 
 mct <- function(dat){ #measures of central tendancy
-  list(mean=mean(dat), median=median(dat), mode=md(dat), midrange=diff(range(dat))/2)
+  list(mean=mean(dat), median=median(dat), mode=md(dat), midrange=sum(range(dat))/2)
 }
 
 # measures of variation ----
