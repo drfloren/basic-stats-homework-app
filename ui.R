@@ -34,7 +34,7 @@ shinyUI(fluidPage(
                    choices = list(#"Chapter 1" = "c1",
                                   "Chapter 2" = "c2", 
                                   "Chapter 3" = "c3",
-                                  #"Chapter 4" = "c4"#, 
+                                  "Chapter 4" = "c4", 
                                   #"Chapter 5" = "c5",
                                   "Chapter 6" = "c6",
                                   "Chapter 7" = "c7",
@@ -58,6 +58,24 @@ shinyUI(fluidPage(
          h3("Chapter 3 Options"),
          sliderInput("c3n", "Sample Size", min=7, max=20, value = 15),
          checkboxInput("c3bpo", "Plot Outliers in Boxplot?", value = FALSE)
+       ),
+       
+       conditionalPanel(
+         condition = "input.ch == 'c4'",
+         h3("Chapter 4 Options"),
+         sliderInput("c4n", "Sample Size (when appropriate)", min=2, max=4, value = 3), #maybe make the value null by default?
+        selectInput("c4card_prob_type", "Type of Question", list("Random"="random",
+                                                        "Basic Probability" = "basic_prob",
+                                                        "Basic Complement" = "basic_comp",
+                                                        "Advanced Complement" = "adv_comp",
+                                                        "And (with Replacement)" = "and_wr",
+                                                        "And (without Replacement)" = "and_wor",
+                                                        "Or (with Mutually Exclusive)" = "or_wme",
+                                                        "Or (without Mutually Exclusive)" = "or_wome")),
+        selectInput("c4card_opts", "Playing Card Options", list("Random" = "random",
+                                                                "Card Values" = "value",
+                                                                "Card Suits" = "suit"))
+        
        ),
        
        conditionalPanel(

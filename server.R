@@ -70,7 +70,10 @@ shinyServer(function(input, output) {
       data <- hidden_data <- prob$data
       
     } else if (input$ch == "c4"){
-      
+      prob <- c4p_cards(card_prob_type = input$c4card_prob_type, n = input$c4n, card_opts = input$c4card_opts) #only cards is done at the moment
+      stem <- prob$stem
+      data <- prob$data
+      hidden_data <- prob$hidden_data
     } else if (input$ch == "c5"){
       
     } else if (input$ch == "c6"){
@@ -133,6 +136,7 @@ shinyServer(function(input, output) {
       out <- c3s_text(dat)
       
     } else if (input$ch == "c4"){
+      out <- c4s_cards(probdat())
       
     } else if (input$ch == "c5"){
       
