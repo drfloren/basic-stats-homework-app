@@ -184,8 +184,6 @@ c4p_cards <- function(card_prob_type="random", n=NULL, card_opts="random"){
   out
 }
 
-d
-
 
 
 
