@@ -63,18 +63,25 @@ shinyUI(fluidPage(
        conditionalPanel(
          condition = "input.ch == 'c4'",
          h3("Chapter 4 Options"),
-         sliderInput("c4n", "Sample Size (when appropriate)", min=2, max=4, value = 3), #maybe make the value null by default?
-        selectInput("c4card_prob_type", "Type of Question", list("Random"="random",
-                                                        "Basic Probability" = "basic_prob",
-                                                        "Basic Complement" = "basic_comp",
-                                                        "Advanced Complement" = "adv_comp",
-                                                        "And (with Replacement)" = "and_wr",
-                                                        "And (without Replacement)" = "and_wor",
-                                                        "Or (with Mutually Exclusive)" = "or_wme",
-                                                        "Or (without Mutually Exclusive)" = "or_wome")),
-        selectInput("c4card_opts", "Playing Card Options", list("Random" = "random",
-                                                                "Card Values" = "value",
-                                                                "Card Suits" = "suit"))
+         # sliderInput("c4n", "Sample Size (when appropriate)", min=2, max=4, value = 3), #maybe make the value null by default? Meh, this option just doesn't really work well with these problems......
+        selectInput("c4_prob_type", "Type of Question", list("Random"="random",
+                                                                 "Basic Probability" = "basic_prob",
+                                                                 "Basic Complement" = "basic_comp",
+                                                                 "Advanced Complement" = "adv_comp",
+                                                                 "And (with Replacement)" = "and_wr",
+                                                                 "And (without Replacement)" = "and_wor",
+                                                                 "Or (with Mutually Exclusive)" = "or_wme",
+                                                                 "Or (without Mutually Exclusive)" = "or_wome",
+                                                                 "Fundamental Counting Rule" = "fcr",
+                                                                 "Ways to Arrange" = "arrange",
+                                                                 "Permutations" = "perm",
+                                                                 "Combinations" = "combn"))
+        # selectInput("c4card_opts", "Playing Card Options", list("Random" = "random",
+        #                                                         "Card Values" = "value",
+        #                                                         "Card Suits" = "suit"))
+        # selectInput("c4context_opts", "Problem Contexts", list("Random" = "random",
+        #                                                         "Card Values" = "value",
+        #                                                         "Card Suits" = "suit"))# lists are different for every problem context/medium, AND (at least within the other group) are different than EACH OTHER, and I don't want to go through each... I guess I could make a second conditional panel under this to display when the particular thing is selected in select input, then make a different options variable for each one (just in case). But, I'm not going to right now...
         
        ),
        

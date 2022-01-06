@@ -229,7 +229,7 @@ c4p_other_fcr <- function(n=NULL){
   
   die_faces <- sample((2:10)*2, size=n, replace = TRUE)
   
-  stem <- paste0("Consider a case where you are 'rolling' ", n, " die with different numbers of faces (", paste0(die_faces, collapse=", "), ") and observing the outcome. What is the size of the sample space?")
+  stem <- paste0("Consider a case where you are 'rolling' ", n, " die with different numbers of faces (", paste0(die_faces, collapse=", "), ") and observing the outcome. How many different outcomes are possible (i.e., what is the size of the sample space)?")
   
   list(stem=stem,
        data="",
