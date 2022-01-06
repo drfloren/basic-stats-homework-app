@@ -122,10 +122,6 @@ c4s_cards <- function(prob_obj){ #get the list of hidden data and, depending on 
   card_prob_type <- prob_obj$hidden_data$card_prob_type
   hdat <- prob_obj$hidden_data
   
-  card_prob_names <- c("basic_prob", "basic_comp", "adv_comp", "and_wr", "and_wor", "or_wme", "or_wome")
-  if(!(card_prob_type %in% card_prob_names))
-    stop(paste0("There are not currently card problems of that type. Card problems must be one of the following: random, ", paste0(card_prob_names, collapse=", ")))
-  
   if(card_prob_type == "basic_prob"){
     out <- c4s_cards_basic(type=hdat$type, id=hdat$id)
   } else if (card_prob_type == "basic_comp"){
@@ -140,6 +136,8 @@ c4s_cards <- function(prob_obj){ #get the list of hidden data and, depending on 
     out <- c4s_cards_or_wme(type=hdat$type, id=hdat$id)
   } else if (card_prob_type == "or_wome"){
     out <- c4s_cards_or_wome(type=hdat$type, id=hdat$id) #no choice here: needs both suit and value...
+  } else {
+    stop("Problem type is not currently supported by c4s_cards.")
   }
   out
 }
