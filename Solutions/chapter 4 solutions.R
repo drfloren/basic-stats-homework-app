@@ -151,6 +151,39 @@ c4s_cards <- function(prob_obj){ #get the list of hidden data and, depending on 
 
 
 
+# Empirical ----
+# Start with conditional probability, then move on.
+c4s_empirical_cond <- function(tab, wr, wc, wg){
+  cn <- colnames(tab)
+  rn <- rownames(tab)
+  
+  if(wg=="r"){
+    equation <- paste0("P(", cn[wc], "|", rn[wr],")")
+    work <- paste0("n(", cn[wc], " and ", rn[wr],") / n(", rn[wr], ") = ", tab[wr,wc], "/", sum(tab[wr,]))
+    answer <- tab[wr,wc]/sum(tab[wr,])
+  } else if (wg=="c") {
+    equation <- paste0("P(", rn[wr], "|", cn[wc],")")
+    work <- paste0("n(", rn[wr], " and ", cn[wc],") / n(", cn[wc], ") = ", tab[wr,wc], "/", sum(tab[,wc]))
+    answer <- tab[wr,wc]/sum(tab[,wc])
+  } else {
+    stop("error in wg entry to c4s_empirical_cond")
+  }
+  
+  list(`Equation`= equation,
+       `Work`= work,
+       `Answer`= fr(answer, dig = 4))
+}
+# foo <- c4p_empirical_cond(); foo; c4s_empirical_cond(foo$data, foo$hidden_data$wr, foo$hidden_data$wc, foo$hidden_data$wg)
+
+
+
+
+
+
+
+
+
+
 # Other ----
 # These problems will note have any particular context associated with them...
 ## Arranging ----
@@ -234,6 +267,8 @@ c4s <- function(prob_obj){ #get the list of hidden data and, depending on the pr
     out <- c4s_cards_or_wme(type=hdat$type, id=hdat$id)
   } else if (prob_type == "or_wome"){
     out <- c4s_cards_or_wome(type=hdat$type, id=hdat$id) #no choice here: needs both suit and value...
+  } else if (prob_type == "cond"){
+    out <- c4s_empirical_cond(tab=prob_obj$data, wr=hdat$wr, wc=hdat$wc, wg=hdat$wg)
   } else if (prob_type == "arrange"){
     out <- c4s_other_arrange(n=hdat$n)
   } else if (prob_type == "fcr"){
@@ -248,7 +283,6 @@ c4s <- function(prob_obj){ #get the list of hidden data and, depending on the pr
   out
 }
 # foo <- c4p(); foo; c4s(foo)
-
 
 
 

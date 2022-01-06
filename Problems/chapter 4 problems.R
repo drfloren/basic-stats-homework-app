@@ -194,6 +194,50 @@ c4p_cards <- function(card_prob_type="random", n=NULL, card_opts="random"){
 
 
 
+# Empirical ----
+# Start with conditional probability, then move on.
+c4p_empirical_cond <- function(){
+  # can change these for context...
+  context <- sample(c("medicine", "business"), 1)
+  
+  if (context=="medicine"){
+    cn <- c("Nurse", "Doctor")
+    rn <- c("ER", "Family Practice")
+  } else {
+    cn <- c("Windows user", "Mac user")
+    rn <- c("Sales", "Accounting")
+  }
+  
+  tab <- matrix(sample(1:100, size=4, replace=TRUE), ncol=2)
+  rownames(tab) <- rn
+  colnames(tab) <- cn
+  
+  wr <- sample(1:2, 1) #which row
+  wc <- sample(1:2, 1) #which column
+  wg <- sample(c("r", "c"), 1) #which is given
+  
+  if(wg=="r"){
+    stem <- paste0("Using the data below, find the probability than an individual is a ", cn[wc],", given that they work in the ", rn[wr], " department.")
+  } else {
+    stem <- paste0("Using the data below, find the probability than an individual works in the ", rn[wr]," department, given that they are a ", cn[wc], ".")
+  }
+  
+  list(stem=stem,
+       data=tab,
+       hidden_data=list(wr=wr,
+                        wc=wc,
+                        wg=wg))
+}
+
+
+
+
+
+
+
+
+
+
 # Other ----
 # These problems will not have any particular context associated with them...
 ## Arranging ----
@@ -316,7 +360,7 @@ c4p_other_perm <- function(context="random", n=NULL){
 
 # Complete Problem Function ----
 c4p <- function(prob_type="random", n=NULL, card_opts="random", context="random"){
-  prob_names <- c("basic_prob", "basic_comp", "adv_comp", "and_wr", "and_wor", "or_wme", "or_wome", "arrange", "fcr", "combn", "perm")
+  prob_names <- c("basic_prob", "basic_comp", "adv_comp", "and_wr", "and_wor", "or_wme", "or_wome", "cond", "arrange", "fcr", "combn", "perm")
   ds <- sample(1:length(prob_names), size=1) #pick one type of problem, for if it is random
   if(prob_type=="random"){
     pn <- prob_names[ds] 
@@ -340,6 +384,8 @@ c4p <- function(prob_type="random", n=NULL, card_opts="random", context="random"
     out <- c4p_cards_or_wme(type=card_opts)
   } else if (pn == "or_wome"){
     out <- c4p_cards_or_wome() #no choice here: needs both suit and value...
+  } else if (pn == "cond"){
+    out <- c4p_empirical_cond()
   } else if (pn == "arrange"){
     out <- c4p_other_arrange(context=context, n=n)
   } else if (pn == "fcr"){

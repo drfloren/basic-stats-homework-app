@@ -11,6 +11,7 @@
 
 library(shiny)
 library(DT)
+library(xtable) #to display table for c4 empirical
 R.utils::sourceDirectory("Problems", onError="warning", modifiedOnly=FALSE) # I needed the modifiedOnly to be false to get this to run properly...
 R.utils::sourceDirectory("Solutions", onError="warning", modifiedOnly=FALSE)
 R.utils::sourceDirectory("General Functions", onError="warning", modifiedOnly=FALSE)
@@ -99,13 +100,31 @@ shinyServer(function(input, output) {
     list(stem=stem, data=data, hidden_data=hidden_data)
   })
   
+  
+  library(googleVis)
+  
   output$problem <- renderUI({
-    HTML(c(probdat()$stem, #either c or paste?
-               "<br/>","<br/>",
-               paste(probdat()$data, collapse=", ")))
+    stem <- probdat()$stem
+    dat <- probdat()$data
+    
+    if(input$ch == "c4" & !identical(dat, "")){ #c4 is different (if it has data)
+      colnames(dat) <- paste0("\\text{", colnames(dat), "}") #cleaning column and rownames printing (so they don't render as math)
+      rownames(dat) <- paste0("\\text{", rownames(dat), "}")
+      
+      xtab <- print(xtable(dat, align=rep("c", ncol(dat)+1)), type="latex", floating=FALSE, tabular.environment="array", comment=FALSE, print.results=FALSE, sanitize.text.function = function(x){x}) #NEED that sanitize text function
+      mj_tab <- paste0("$$", xtab, "$$")
+      list(
+        HTML(c(stem)),
+        withMathJax(HTML(mj_tab))
+        # HTML(html_tab) #if you print the xtable as html, this will print an ugly but usable table
+      )
+      
+    } else { #if we don't need to display a table...
+      HTML(c(probdat()$stem, #either c or paste?
+             "<br/>","<br/>",
+             paste(probdat()$data, collapse=", ")))
+    }
   })
-  
-  
   
   
   # need to split answers by chapter, so output will need to be different (and rendering will need to be different).
