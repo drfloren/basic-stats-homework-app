@@ -217,37 +217,37 @@ c4s_other_perm <- function(n, r){
 
 # Complete Solution Function ----
 c4s <- function(prob_obj){ #get the list of hidden data and, depending on the problem type, use whatever parts are expected...
-  card_prob_type <- prob_obj$hidden_data$card_prob_type
+  prob_type <- prob_obj$hidden_data$prob_type
   hdat <- prob_obj$hidden_data
   
-  if(card_prob_type == "basic_prob"){
+  if(prob_type == "basic_prob"){
     out <- c4s_cards_basic(type=hdat$type, id=hdat$id)
-  } else if (card_prob_type == "basic_comp"){
+  } else if (prob_type == "basic_comp"){
     out <- c4s_cards_bascomp(type=hdat$type, id=hdat$id)
-  } else if (card_prob_type == "adv_comp"){
+  } else if (prob_type == "adv_comp"){
     out <- c4s_cards_advcomp(type=hdat$type, id=hdat$id, n=hdat$n)
-  } else if (card_prob_type == "and_wr"){
+  } else if (prob_type == "and_wr"){
     out <- c4s_cards_and_wr(type=hdat$type, id=hdat$id, n=hdat$n)
-  } else if (card_prob_type == "and_wor"){
+  } else if (prob_type == "and_wor"){
     out <- c4s_cards_and_wor(type=hdat$type, id=hdat$id, n=hdat$n)
-  } else if (card_prob_type == "or_wme"){
+  } else if (prob_type == "or_wme"){
     out <- c4s_cards_or_wme(type=hdat$type, id=hdat$id)
-  } else if (card_prob_type == "or_wome"){
+  } else if (prob_type == "or_wome"){
     out <- c4s_cards_or_wome(type=hdat$type, id=hdat$id) #no choice here: needs both suit and value...
-  } else if (pn == "arrange"){
+  } else if (prob_type == "arrange"){
     out <- c4s_other_arrange(n=hdat$n)
-  } else if (pn == "fcr"){
+  } else if (prob_type == "fcr"){
     out <- c4s_other_fcr(die_faces = hdat$die_faces)
-  } else if (pn == "combn"){
+  } else if (prob_type == "combn"){
     out <- c4s_other_combn(n=hdat$n, r=hdat$r)
-  } else if (pn == "perm"){
+  } else if (prob_type == "perm"){
     out <- c4s_other_perm(n=hdat$n, r=hdat$r)
   } else {
     stop("Problem type currently not supported in c4s.")
   }
   out
 }
-foo <- c4p(); foo; c4s(foo)
+# foo <- c4p(); foo; c4s(foo)
 
 
 

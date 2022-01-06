@@ -229,7 +229,7 @@ c4p_other_fcr <- function(n=NULL){
   
   die_faces <- sample((2:10)*2, size=n, replace = TRUE)
   
-  stem <- paste0("Consider a case where you are 'rolling' ", n, " die with different numbers of faces (", paste0(die_faces, collapse=", "), ") and observing the outcome. What is the size of the sample space?")
+  stem <- paste0("Consider a case where you are 'rolling' ", n, " die with different numbers of faces (", paste0(die_faces, collapse=", "), ") and observing the outcome. How many different outcomes are possible (i.e., what is the size of the sample space)?")
   
   list(stem=stem,
        data="",
@@ -281,7 +281,7 @@ c4p_other_perm <- function(context="random", n=NULL){
   } else if (context=="surf") {
     stem <- paste0("In a recent local surfing competition, the top ", r," surfers are automatically bumped up to the next level (professional), with the top placed surfer getting placed in the top tier pro circuit, the second placed getting the second tier pro circuit, etc. If ", n, " total surfers entered the competition, how many different ways can the winners be selected?")
   } else if (context=="work") {
-    stem <- paste0("A local business is handing out prizes to the top ", r," individuals from their sales department! The top individual will be given $1000, the second individual will be given $9○00, and so on. If ", n, " total individuals work in the sales department, how many different ways can the winners be selected?")
+    stem <- paste0("A local business is handing out prizes to the top ", r," individuals from their sales department! The top individual will be given $1000, the second individual will be given $900, and so on. If ", n, " total individuals work in the sales department, how many different ways can the winners be selected?")
   } else if (context=="class") {
     stem <- paste0("We are selecting ", r," individuals from your year to serve as your 'class government officials'. The person with the most votes will serve as 'president', while the person with the second most votes will be 'vice president', and so forth. If ", n, " total individuals are in your class, how many different ways can the government officials be selected?")
   }
