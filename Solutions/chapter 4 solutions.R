@@ -1,7 +1,7 @@
 # Header ----
 # Description: There are a TON of types of problems for this chapter, especially if I utilize multiple mediums (the goal). I'll start with a single medium, work all of the problems (and all of the solutions) then move on to the next one. Below is a list of problem types and mediums that should be covered.
 # Problem Types: Basic, Basic Compliment, Advanced Compliment, And with Replacement, And without Replacement, Or with Mutually Exclusive, Or without Mutually Exclusive, Conditional
-# Mediums: Cards in a Deck, Balls in an Urn, Coins (when appropriate), Die (when appropriate), Empirical
+# Mediums (or context): Cards in a Deck, Balls in an Urn, Coins (when appropriate), Die (when appropriate), Empirical
 
 # Actually, lets make a matrix of when things are appropriate:
 approp <- structure(c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, 
@@ -124,7 +124,7 @@ c4s_cards <- function(prob_obj){ #get the list of hidden data and, depending on 
   
   card_prob_names <- c("basic_prob", "basic_comp", "adv_comp", "and_wr", "and_wor", "or_wme", "or_wome")
   if(!(card_prob_type %in% card_prob_names))
-    stop(paste0("Problems must be one of the following: random, ", paste0(card_prob_names, collapse=", ")))
+    stop(paste0("There are not currently card problems of that type. Card problems must be one of the following: random, ", paste0(card_prob_names, collapse=", ")))
   
   if(card_prob_type == "basic_prob"){
     out <- c4s_cards_basic(type=hdat$type, id=hdat$id)
@@ -153,6 +153,39 @@ c4s_cards <- function(prob_obj){ #get the list of hidden data and, depending on 
 
 
 
+# Other ----
+# These problems will note have any particular context associated with them...
+## Arranging ----
+c4s_other_arrange <- function(n){
+  list(`Equation`=paste0("n!"),
+       `Work`= paste0(n,"!"),
+       `Answer`= factorial(n))
+}
+foo <- c4p_other_arrange(); foo; c4s_other_arrange(foo$hidden_data$n)
+
+## Sample Space (fundamental counting rule) ----
+c4s_other_fcr <- function(die_faces){
+  n <- length(die_faces)
+
+  list(`Equation`= paste0("n(S) = (", paste0(paste0("k_", 1:n), collapse=")*("), ")"),
+       `Work`= paste0("n(S) = (", paste0(die_faces, collapse=")*("), ")"),
+       `Answer`= prod(die_faces))
+}
+foo <- c4p_other_fcr(); foo; c4s_other_fcr(foo$hidden_data$die_faces)
+
+## Combination ----
+c4s_other_combn <- function(n, r){
+  list(`Equation`=paste0("nCr = (n!) / ((n-r)!*r!)"),
+       `Work`= paste0(n, "C", r, " = (", n, "!) / ((", n,"-", r,")!*", r,"!)"),
+       `Answer`= choose(n, r))
+}
+
+## Permutation ----
+c4s_other_perm <- function(n, r){
+  list(`Equation`=paste0("nPr = (n!) / (n-r)!"),
+       `Work`= paste0(n, "P", r, " = (", n, "!) / (", n,"-", r,")!"),
+       `Answer`= choose(n, r) * factorial(r))
+}
 
 
 
@@ -162,3 +195,78 @@ c4s_cards <- function(prob_obj){ #get the list of hidden data and, depending on 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Complete Solution Function ----
+c4s <- function(prob_obj){ #get the list of hidden data and, depending on the problem type, use whatever parts are expected...
+  card_prob_type <- prob_obj$hidden_data$card_prob_type
+  hdat <- prob_obj$hidden_data
+  
+  if(card_prob_type == "basic_prob"){
+    out <- c4s_cards_basic(type=hdat$type, id=hdat$id)
+  } else if (card_prob_type == "basic_comp"){
+    out <- c4s_cards_bascomp(type=hdat$type, id=hdat$id)
+  } else if (card_prob_type == "adv_comp"){
+    out <- c4s_cards_advcomp(type=hdat$type, id=hdat$id, n=hdat$n)
+  } else if (card_prob_type == "and_wr"){
+    out <- c4s_cards_and_wr(type=hdat$type, id=hdat$id, n=hdat$n)
+  } else if (card_prob_type == "and_wor"){
+    out <- c4s_cards_and_wor(type=hdat$type, id=hdat$id, n=hdat$n)
+  } else if (card_prob_type == "or_wme"){
+    out <- c4s_cards_or_wme(type=hdat$type, id=hdat$id)
+  } else if (card_prob_type == "or_wome"){
+    out <- c4s_cards_or_wome(type=hdat$type, id=hdat$id) #no choice here: needs both suit and value...
+  } else if (pn == "arrange"){
+    out <- c4s_other_arrange(n=hdat$n)
+  } else if (pn == "fcr"){
+    out <- c4s_other_fcr(die_faces = hdat$die_faces)
+  } else if (pn == "combn"){
+    out <- c4s_other_combn(n=hdat$n, r=hdat$r)
+  } else if (pn == "perm"){
+    out <- c4s_other_perm(n=hdat$n, r=hdat$r)
+  } else {
+    stop("Problem type currently not supported in c4s.")
+  }
+  out
+}
+foo <- c4p(); foo; c4s(foo)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# foo <- problem
+# foo
+# soln(problem$hidden_data$, )

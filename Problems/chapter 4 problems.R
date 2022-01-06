@@ -1,7 +1,8 @@
 # Header ----
 # Description: There are a TON of types of problems for this chapter, especially if I utilize multiple mediums (the goal). I'll start with a single medium, work all of the problems (and all of the solutions) then move on to the next one. Below is a list of problem types and mediums that should be covered.
 # Problem Types: Basic, Basic Compliment, Advanced Compliment, And with Replacement, And without Replacement, Or with Mutually Exclusive, Or without Mutually Exclusive, Conditional, and then counting rules
-# Mediums: Cards in a Deck, Balls in an Urn, Coins (when appropriate), Die (when appropriate), Empirical
+# Mediums (or context): Cards in a Deck, Balls in an Urn, Coins (when appropriate), Die (when appropriate), Empirical
+
 
 # Actually, lets make a matrix of when things are appropriate:
 approp <- structure(c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, 
@@ -161,7 +162,7 @@ c4p_cards <- function(card_prob_type="random", n=NULL, card_opts="random"){
     cpn <- card_prob_names[cds] #card, so start with c (so this doesn't get confused later on...)
   } else {
     if(!(card_prob_type %in% card_prob_names))
-      stop(paste0("Problems must be one of the following: random, ", paste0(card_prob_names, collapse=", ")))
+      stop(paste0("There are not currently card problems of that type. Card problems must be one of the following: random, ", paste0(card_prob_names, collapse=", ")))
     cpn <- card_prob_type
   }
   
@@ -183,6 +184,191 @@ c4p_cards <- function(card_prob_type="random", n=NULL, card_opts="random"){
   out$hidden_data$card_prob_type <- cpn
   out
 }
+
+
+
+
+
+
+
+
+
+
+# Other ----
+# These problems will not have any particular context associated with them...
+## Arranging ----
+c4p_other_arrange <- function(context="random", n=NULL){
+  context_options <- c("none", "race", "paper", "guests")
+  if(context=="random")
+    context <- sample(context_options, size=1)
+  if(!(context %in% context_options))
+    stop(paste0("context must be one of the following: ", paste0(context_options, collapse=", ")))
+  
+  if(is.null(n))
+    n <- sample(3:12, size = 1)
+  
+  if(context=="none"){
+    stem <- paste0("Calculate how many unique ways you can arrange ", n, " objects.")
+  } else if (context=="race") {
+    stem <- paste0("If ", n, " runners are participating in a race, determine the number of unique ways they can finish.")
+  } else if (context=="paper") {
+    stem <- paste0("A professor just dropped all their notes on the ground! If they had ", n, " pieces of paper and picked them up at random, determine the number of arrangements the papers could be in now.")
+  } else if (context=="guests") {
+    stem <- paste0("A clinic just had ", n, " clients check in online at the exact same time, and need to determine what order to see them. Determine how many unique orders they could see the clients in.")
+  }  else {stop("context error in c4p_other_arrange")}
+  
+  list(stem=stem,
+       data="",
+       hidden_data=list(n=n))
+}
+
+## Sample Space (fundamental counting rule) ----
+c4p_other_fcr <- function(n=NULL){
+  if(is.null(n))
+    n <- sample(2:5, size = 1)
+  
+  die_faces <- sample((2:10)*2, size=n, replace = TRUE)
+  
+  stem <- paste0("Consider a case where you are 'rolling' ", n, " die with different numbers of faces (", paste0(die_faces, collapse=", "), ") and observing the outcome. What is the size of the sample space?")
+  
+  list(stem=stem,
+       data="",
+       hidden_data=list(die_faces=die_faces))
+}
+
+## Combination ----
+c4p_other_combn <- function(context="random", n=NULL){
+  context_options <- c("none", "surf", "work", "class")
+  if(context=="random")
+    context <- sample(context_options, size=1)
+  if(!(context %in% context_options))
+    stop(paste0("context must be one of the following: ", paste0(context_options, collapse=", ")))
+  
+  if(is.null(n))
+    n <- sample(10:100, size = 1)
+  r <- sample(2:10, size=1)
+  
+  if(context=="none"){
+    stem <- paste0("Calculate how many ways you can choose ", r," objects from ", n, " total objects, if order doesn't matter.")
+  } else if (context=="surf") {
+    stem <- paste0("In a recent local surfing competition, the top ", r," surfers are automatically bumped up to the next level (nationals). If ", n, " total surfers entered the competition, how many different ways can the winners be selected?")
+  } else if (context=="work") {
+    stem <- paste0("A local business is selecting the top ", r," individuals from sales for a week long cruise. If ", n, " total individuals work in the sales department, how many different ways can the winners be selected?")
+  } else if (context=="class") {
+    stem <- paste0("We are selecting ", r," individuals from your year to serve as your 'class council' (for reunions and such). If ", n, " total individuals are in your class, how many different ways can the council be selected?")
+  }
+  
+  list(stem=stem,
+       data="",
+       hidden_data=list(r=r,
+                        n=n))
+}
+
+## Permutation ----
+c4p_other_perm <- function(context="random", n=NULL){
+  context_options <- c("none", "surf", "work", "class")
+  if(context=="random")
+    context <- sample(context_options, size=1)
+  if(!(context %in% context_options))
+    stop(paste0("context must be one of the following: ", paste0(context_options, collapse=", ")))
+  
+  if(is.null(n))
+    n <- sample(10:100, size = 1)
+  r <- sample(2:10, size=1)
+  
+  if(context=="none"){
+    stem <- paste0("Calculate how many ways you can choose ", r," objects from ", n, " total objects, if order matters.")
+  } else if (context=="surf") {
+    stem <- paste0("In a recent local surfing competition, the top ", r," surfers are automatically bumped up to the next level (professional), with the top placed surfer getting placed in the top tier pro circuit, the second placed getting the second tier pro circuit, etc. If ", n, " total surfers entered the competition, how many different ways can the winners be selected?")
+  } else if (context=="work") {
+    stem <- paste0("A local business is handing out prizes to the top ", r," individuals from their sales department! The top individual will be given $1000, the second individual will be given $9○00, and so on. If ", n, " total individuals work in the sales department, how many different ways can the winners be selected?")
+  } else if (context=="class") {
+    stem <- paste0("We are selecting ", r," individuals from your year to serve as your 'class government officials'. The person with the most votes will serve as 'president', while the person with the second most votes will be 'vice president', and so forth. If ", n, " total individuals are in your class, how many different ways can the government officials be selected?")
+  }
+  
+  list(stem=stem,
+       data="",
+       hidden_data=list(r=r,
+                        n=n))
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Complete Problem Function ----
+c4p <- function(prob_type="random", n=NULL, card_opts="random", context="random"){
+  prob_names <- c("basic_prob", "basic_comp", "adv_comp", "and_wr", "and_wor", "or_wme", "or_wome", "arrange", "fcr", "combn", "perm")
+  ds <- sample(1:length(prob_names), size=1) #pick one type of problem, for if it is random
+  if(prob_type=="random"){
+    pn <- prob_names[ds] 
+  } else {
+    if(!(prob_type %in% prob_names))
+      stop(paste0("There are not currently problems of that type. Problems must be one of the following: random, ", paste0(prob_names, collapse=", ")))
+    pn <- prob_type
+  }
+  
+  if(pn == "basic_prob"){
+    out <- c4p_cards_basic(type=card_opts)
+  } else if (pn == "basic_comp"){
+    out <- c4p_cards_bascomp(type=card_opts)
+  } else if (pn == "adv_comp"){
+    out <- c4p_cards_advcomp(type=card_opts, n=n)
+  } else if (pn == "and_wr"){
+    out <- c4p_cards_and_wr(type=card_opts, n=n)
+  } else if (pn == "and_wor"){
+    out <- c4p_cards_and_wor(type=card_opts, n=n)
+  } else if (pn == "or_wme"){
+    out <- c4p_cards_or_wme(type=card_opts)
+  } else if (pn == "or_wome"){
+    out <- c4p_cards_or_wome() #no choice here: needs both suit and value...
+  } else if (pn == "arrange"){
+    out <- c4p_other_arrange(context=context, n=n)
+  } else if (pn == "fcr"){
+    out <- c4p_other_fcr(n=n)
+  } else if (pn == "combn"){
+    out <- c4p_other_combn(context=context, n=n)
+  } else if (pn == "perm"){
+    out <- c4p_other_perm(context=context, n=n)
+  } else {
+    stop("Problem type currently not supported in c4p.")
+  }
+  out$hidden_data$prob_type <- pn
+  out
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
