@@ -76,7 +76,10 @@ shinyServer(function(input, output) {
       data <- prob$data
       hidden_data <- prob$hidden_data
     } else if (input$ch == "c5"){
-      
+      prob <- c5p(prob_type = input$c5_prob_type)
+      stem <- prob$stem
+      data <- prob$data
+      hidden_data <- prob$hidden_data
     } else if (input$ch == "c6"){
       prob <- c6p(direction = input$c6dir, prob_type=input$c6type, n=input$c6n)
       stem <- prob$stem
@@ -99,15 +102,16 @@ shinyServer(function(input, output) {
     
     list(stem=stem, data=data, hidden_data=hidden_data)
   })
+
   
   
-  library(googleVis)
+  
   
   output$problem <- renderUI({
     stem <- probdat()$stem
     dat <- probdat()$data
     
-    if(input$ch == "c4" & !identical(dat, "")){ #c4 is different (if it has data)
+    if(input$ch == "c4" & !identical(dat, "")){ #do a few ifs for the different ones (most problems will go in the final "else")
       colnames(dat) <- paste0("\\text{", colnames(dat), "}") #cleaning column and rownames printing (so they don't render as math)
       rownames(dat) <- paste0("\\text{", rownames(dat), "}")
       
@@ -117,6 +121,14 @@ shinyServer(function(input, output) {
         HTML(c(stem)),
         withMathJax(HTML(mj_tab))
         # HTML(html_tab) #if you print the xtable as html, this will print an ugly but usable table
+      )
+      
+    } else if (input$ch == "c5" & !identical(dat, "")) {
+      xtab <- print(xtable(dat, align=rep("c", ncol(dat)+1)), type="latex", floating=FALSE, tabular.environment="array", comment=FALSE, print.results=FALSE, include.colnames = FALSE, sanitize.text.function = function(x){x}) #NEED that sanitize text function
+      mj_tab <- paste0("$$", xtab, "$$")
+      list(
+        HTML(c(stem)),
+        withMathJax(HTML(mj_tab))
       )
       
     } else { #if we don't need to display a table...
@@ -158,7 +170,7 @@ shinyServer(function(input, output) {
       out <- c4s(probdat())
       
     } else if (input$ch == "c5"){
-      
+      out <- c5s(probdat())
     } else if (input$ch == "c6"){
       out <- c6s_text(prob_type = hdat$prob_type, hdat=hdat)
       

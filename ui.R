@@ -36,7 +36,7 @@ shinyUI(fluidPage(
                                   "Chapter 2" = "c2", 
                                   "Chapter 3" = "c3",
                                   "Chapter 4" = "c4", 
-                                  #"Chapter 5" = "c5",
+                                  "Chapter 5" = "c5",
                                   "Chapter 6" = "c6",
                                   "Chapter 7" = "c7",
                                   "Chapter 8" = "c8"
@@ -85,6 +85,17 @@ shinyUI(fluidPage(
         #                                                         "Card Values" = "value",
         #                                                         "Card Suits" = "suit"))# lists are different for every problem context/medium, AND (at least within the other group) are different than EACH OTHER, and I don't want to go through each... I guess I could make a second conditional panel under this to display when the particular thing is selected in select input, then make a different options variable for each one (just in case). But, I'm not going to right now...
         
+       ),
+       
+       conditionalPanel(
+         condition = "input.ch == 'c5'",
+         h3("Chapter 5 Options"),
+         selectInput("c5_prob_type", "Type of Question", list("Random"="random",
+                                                              "Discrete" = "discrete",
+                                                              "Expected Value" = "expect",
+                                                              "Binomial: Single Event" = "sebin",
+                                                              "Binomial: Mean, Var, SD" = "binomial"))
+
        ),
        
        conditionalPanel(
