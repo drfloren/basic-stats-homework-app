@@ -332,7 +332,7 @@ c8s_ptest_steps <- function(n, x, direction, alpha, nh, cv_dig=2, ts_dig=4){
     } else if (ts<min(cv)){
       s4 <- paste0("Since ", ts, " is less than ", min(cv), ", we reject the null hypothesis.")
     } else {
-      s4 <- paste0("Since ", ts, " is between ", max(cv), " and ", min(cv), ", we faile to reject the null hypothesis.")
+      s4 <- paste0("Since ", ts, " is between ", max(cv), " and ", min(cv), ", we fail to reject the null hypothesis.")
     }
   }
   
