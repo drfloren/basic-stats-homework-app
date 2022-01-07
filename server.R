@@ -93,7 +93,7 @@ shinyServer(function(input, output) {
       hidden_data <- prob$hidden_data
       
     } else if (input$ch == "c8"){ #need to figure out what to do for z, t, and p
-      prob <- c8p(n=input$c8n, direction=input$c8dir, alpha=input$c8alpha)
+      prob <- c8p(prob_type = input$c8type, n=input$c8n, direction=input$c8dir, alpha=input$c8alpha)
       stem <- prob$stem
       data <- prob$data
       hidden_data <- prob$hidden_data
@@ -178,7 +178,7 @@ shinyServer(function(input, output) {
       out <- c7s_text(prob_type = hdat$prob_type, hdat=hdat)
       
     } else if (input$ch == "c8"){ #need to figure out what to do for z, t, and p (currently t)
-      out <- t_test_steps(data = hdat$dat, direction = hdat$direction, alpha = hdat$alpha, nh = hdat$h0, dig=3)
+      out <- c8s_steps(prob_obj = probdat())
     }
     out
   })
@@ -209,7 +209,9 @@ shinyServer(function(input, output) {
       out <- c7s_plot(prob_type = hdat$prob_type, hdat=hdat)
       
     } else if (input$ch == "c8"){
-      out <- cv_t_plot(direction = hdat$direction, alpha = hdat$alpha, df=length(hdat$dat) -1, tail_exp=1.1)
+      c8s_plot(prob_obj = probdat())
+      # c8s_plot(prob_type = hdat$prob_type, hdat=hdat)
+      # out <- cv_t_plot(direction = hdat$direction, alpha = hdat$alpha, df=length(hdat$dat) -1, tail_exp=1.1)
     }
   })
   
