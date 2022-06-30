@@ -23,7 +23,7 @@ lnb <- function(dat, cw=NULL, numclass=NULL){
   list(numclass=numclass, minimum=minimum, maximum=maximum, cw=cw, lcl=lcl, ucl=ucl, lcb=lcb, ucb=ucb, breaks=breaks)
 }
 
-fd <- function(dat, cw=NULL, numclass=NULL){
+fd <- function(dat, cw=NULL, numclass=NULL){ #freq distribution
   bounds <- lnb(dat, cw=cw, numclass=numclass)
   numclass <- bounds$numclass
   minimum <- bounds$minimum
