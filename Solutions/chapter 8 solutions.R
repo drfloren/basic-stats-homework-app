@@ -249,11 +249,11 @@ c8s_ttest_plot <- function(data, direction, alpha, nh=0, cv_dig=2, ts_dig=4, tai
     polygon(shade_x, shade_y, col="skyblue")
   } else if (direction=="not equal to"){
     lower_shade_l <- lower_bound
-    upper_shade_l <- qnorm(alpha/2)
+    upper_shade_l <- qt(alpha/2, df=df)
     shade_x_l <- c(lower_shade_l, seq(lower_shade_l, upper_shade_l, by=.01), upper_shade_l)
     shade_y_l <- c(0,dt(seq(lower_shade_l, upper_shade_l, by=.01), df=df),0)
     
-    lower_shade_u <- qnorm(1-alpha/2)
+    lower_shade_u <- qt(1-alpha/2, df=df)
     upper_shade_u <- upper_bound
     shade_x_u <- c(lower_shade_u, seq(lower_shade_u, upper_shade_u, by=.01), upper_shade_u)
     shade_y_u <- c(0,dt(seq(lower_shade_u, upper_shade_u, by=.01), df=df),0)
