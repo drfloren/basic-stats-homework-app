@@ -92,9 +92,9 @@ c8s_ztest_plot <- function(data, sigma=NULL, direction, alpha, nh=0, cv_dig=2, t
 
   #base plot
   if(abs(ts)<0.3){ #if we get too close to the middle, need to extend the plot upwards so the label appears...
-    plot(x, y, main=gt, type="l", xlab="t", ylab="Density", ylim=c(0,max(y)*1.1))
+    plot(x, y, main=gt, type="l", xlab="z", ylab="Density", ylim=c(0,max(y)*1.1))
   } else {
-    plot(x, y, main=gt, type="l", xlab="t", ylab="Density")
+    plot(x, y, main=gt, type="l", xlab="z", ylab="Density")
   }
   
   #shading area
