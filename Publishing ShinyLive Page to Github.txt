@@ -1,0 +1,10 @@
+Steps
+
+- Run the code generation to make the shinylive site
+- Upload that site to github using git console commands (it is too big for RStudio to handle)
+- On github repo, go to "Settings -> Pages", and have the source develop the page from the right directory/branch
+- Wait for a while (hour, maybe?). It will then give you the link to a functioning website on the Pages page.
+- Note that, I assume, I'll have to rebuild using shiny live for any updates.
+
+
+PS need bugfix on display of table for chapter 5 probability distribution table.
