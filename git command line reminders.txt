@@ -1,0 +1,5 @@
+Basic Git commands from line 
+
+for cd, just do cd "copied path from file"
+
+https://www.earthdatascience.org/workshops/intro-version-control-git/basic-git-commands/
