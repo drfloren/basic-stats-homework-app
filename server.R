@@ -112,27 +112,27 @@ shinyServer(function(input, output) {
     dat <- probdat()$data
     
     if(input$ch == "c4" & !identical(dat, "")){ #do a few ifs for the different ones (most problems will go in the final "else")
-      # colnames(dat) <- paste0("\\text{", colnames(dat), "}") #cleaning column and rownames printing (so they don't render as math)
-      # rownames(dat) <- paste0("\\text{", rownames(dat), "}")
-      # xtab <- print(xtable(dat, align=rep("c", ncol(dat)+1)), type="latex", floating=FALSE, tabular.environment="array", comment=FALSE, print.results=FALSE, sanitize.text.function = function(x){x}) #NEED that sanitize text function
+      colnames(dat) <- paste0("\\text{", colnames(dat), "}") #cleaning column and rownames printing (so they don't render as math)
+      rownames(dat) <- paste0("\\text{", rownames(dat), "}")
+      xtab <- print(xtable(dat, align=rep("c", ncol(dat)+1)), type="latex", floating=FALSE, tabular.environment="array", comment=FALSE, print.results=FALSE, sanitize.text.function = function(x){x}) #NEED that sanitize text function
       
-      html_tab <- print(xtable(dat, align=rep("c", ncol(dat)+1)), type="html", floating=FALSE, tabular.environment="array", comment=FALSE, print.results=FALSE, sanitize.text.function = function(x){x}, sanitize.rownames.function = function(x){x}) #NEED that sanitize text function.... # 02.15.2024 just figured out why this didn't work: I have the text commands ABOVE, and if I removed them this would work fine. I kindof like the pretty formatting, but this is a good option if needed (and something to copy and paste for down below)
+      # html_tab <- print(xtable(dat, align=rep("c", ncol(dat)+1)), type="html", floating=FALSE, tabular.environment="array", comment=FALSE, print.results=FALSE, sanitize.text.function = function(x){x}, sanitize.rownames.function = function(x){x}) #NEED that sanitize text function.... # 02.15.2024 just figured out why this didn't work: I have the text commands ABOVE, and if I removed them this would work fine. I kindof like the pretty formatting, but this is a good option if needed (and something to copy and paste for down below)
       
-      # mj_tab <- paste0("$$", xtab, "$$")
+      mj_tab <- paste0("$$", xtab, "$$")
       list(
         HTML(c(stem)),
-        # withMathJax(HTML(mj_tab))
-        HTML(html_tab) #if you print the xtable as html, this will print an ugly but usable table
+        withMathJax(HTML(mj_tab))
+        # HTML(html_tab) #if you print the xtable as html, this will print an ugly but usable table
       )
       
     } else if (input$ch == "c5" & !identical(dat, "")) {
-      # xtab <- print(xtable(dat, align=rep("c", ncol(dat)+1)), type="latex", floating=FALSE, tabular.environment="array", comment=FALSE, print.results=FALSE, include.colnames = FALSE, sanitize.text.function = function(x){x}) #NEED that sanitize text function
-      html_tab <- print(xtable(dat, align=rep("c", ncol(dat)+1)), type="html", floating=FALSE, tabular.environment="array", comment=FALSE, print.results=FALSE, sanitize.text.function = function(x){x}, sanitize.rownames.function = function(x){x})
-      # mj_tab <- paste0("$$", xtab, "$$")
+      xtab <- print(xtable(dat, align=rep("c", ncol(dat)+1)), type="latex", floating=FALSE, tabular.environment="array", comment=FALSE, print.results=FALSE, include.colnames = FALSE, sanitize.text.function = function(x){x}) #NEED that sanitize text function
+      # html_tab <- print(xtable(dat, align=rep("c", ncol(dat)+1)), type="html", floating=FALSE, tabular.environment="array", comment=FALSE, print.results=FALSE, sanitize.text.function = function(x){x}, sanitize.rownames.function = function(x){x})
+      mj_tab <- paste0("$$", xtab, "$$")
       list(
         HTML(c(stem)),
-        # withMathJax(HTML(mj_tab))
-        HTML(html_tab)
+        withMathJax(HTML(mj_tab))
+        # HTML(html_tab)
       )
       
     } else { #if we don't need to display a table...
